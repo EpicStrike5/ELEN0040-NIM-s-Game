@@ -1,0 +1,6 @@
+
+State Machine - |ELEN0040_Nim|nim_fsm:u_fsm|state_r
+Name state_r.state_bit_1 state_r.state_bit_0 
+state_r.S_IDLE 0 0 
+state_r.S_PLAY 0 1 
+state_r.S_WIN 1 0 
