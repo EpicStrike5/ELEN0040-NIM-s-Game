@@ -2,8 +2,8 @@
 -- file : nim_fsm.vhd
 --
 -- Main purpose : game state machine. controls stick count, turn order,
---               player selection, joker effects, synchronous reset, and
---               an auto-playing bot for player 2. clocked by clk1.
+--               player selection, joker effects, and synchronous reset.
+--               clocked by clk1.
 --
 -- Input  : clk1    -- game clock (0.7-48 Hz)
 --          rst     -- synchronous reset: returns to S_IDLE from any state
@@ -13,23 +13,22 @@
 -- Output : sticks  -- remaining stick count
 --          max_tk  -- max sticks the active player may take this turn
 --          sel     -- current player selection (1..max_tk)
---          player  -- active player (0=P1/human, 1=P2/bot)
+--          player  -- active player (0=P1, 1=P2)
 --          winner  -- winning player after game ends
 --          state   -- current FSM state (S_IDLE, S_PLAY, S_WIN)
 --          j1_av   -- joker 1 still available for active player
 --          j2_av   -- joker 2 still available for active player
 --
--- Bot (P2): acts on the first clk1 cycle of its turn (no delay counter —
---   removed to stay within 160 LEs). Takes a random amount 1..min(4, max_tk).
---   Bot and human confirm share ONE comparator + subtractor via eff_sel mux.
---   Bot never uses jokers; j1_p2 / j2_p2 remain '1' for the whole game.
+-- Two-player mode: bot temporarily removed to stay within 160 LEs with the
+--   carousel animation. Both P1 and P2 are human; player_r indicates whose
+--   turn it is. Both players share the same physical buttons and can use jokers.
+--   To re-add the bot: restore the bot_take/eff_sel variables in S_PLAY and
+--   add back `player_r='0'` guards on human-button branches.
 --
 -- Edge cases handled:
 --   Hold CONFIRM : db_edge is a single-cycle pulse from nim_debounce;
 --                  holding the button only fires the FSM once. (by design)
 --   Simultaneous : priority is UP > DOWN > JOKER1 > JOKER2 > CONFIRM.
---                  Each human-button condition guards with `player_r='0'`
---                  so the bot's auto-confirm at the bottom is never blocked.
 -- ///
 
 library IEEE;
@@ -64,7 +63,7 @@ architecture rtl of nim_fsm is
     signal state_r  : state_t   := S_IDLE;
 
     -- One flag per player per joker. '1' = available, '0' = spent.
-    -- j1_p2 / j2_p2 are reset on START but never cleared (bot does not use jokers).
+    -- All four flags reset to '1' on START; cleared individually when a player uses one.
     signal j1_p1 : std_logic := '1';
     signal j1_p2 : std_logic := '1';
     signal j2_p1 : std_logic := '1';
@@ -90,13 +89,6 @@ begin
         variable delta   : unsigned(2 downto 0);
         variable ns_v    : unsigned(5 downto 0);
         variable nm      : unsigned(3 downto 0);
-        -- eff_sel: shared input to the confirm comparator/subtractor.
-        -- bot (player_r='1') uses a random 1..min(4,max_tk);
-        -- human (player_r='0') uses sel_r.
-        -- Having ONE variable here lets synthesis build ONE comparator and
-        -- ONE subtractor for both paths instead of duplicating them.
-        variable eff_sel : unsigned(3 downto 0);
-        variable bot_take : unsigned(3 downto 0);
     begin
         if rising_edge(clk1) then
 
@@ -136,41 +128,26 @@ begin
                 when S_PLAY =>
                 -- -----------------------------------------------------------------
 
-                    -- Compute bot's random take: rnd(1:0)+1 = 1..4, clamped to max_tk.
-                    -- This variable is only used when player_r='1'; synthesis discards
-                    -- it for the player_r='0' path.
-                    bot_take := resize(unsigned(rnd(1 downto 0)), 4) + 1;
-                    if bot_take > max_tk_r then bot_take := max_tk_r; end if;
+                    -- Priority: UP > DOWN > JOKER1 > JOKER2 > CONFIRM.
+                    -- Both players are human; player_r tells whose turn it is.
 
-                    -- eff_sel selects between bot's random take and the human's
-                    -- current selection. ONE comparator and ONE subtractor below
-                    -- serve both, minimising logic duplication.
-                    if player_r = '1' then eff_sel := bot_take;
-                    else                   eff_sel := sel_r;
-                    end if;
-
-                    -- Priority: UP > DOWN > JOKER1 > JOKER2 > CONFIRM / BOT-AUTO.
-                    -- Every human-button condition includes `player_r = '0'` so that
-                    -- when it is the bot's turn (player_r='1') all human branches are
-                    -- skipped and control falls through to the shared confirm path.
-
-                    if player_r = '0' and db_edge(B_UP) = '1' then
+                    if db_edge(B_UP) = '1' then
                         -- increment sel, capped at max_tk
                         if sel_r < max_tk_r then sel_r <= sel_r + 1; end if;
 
-                    elsif player_r = '0' and db_edge(B_DOWN) = '1' then
+                    elsif db_edge(B_DOWN) = '1' then
                         -- decrement sel, floored at 1
                         if sel_r > 1 then sel_r <= sel_r - 1; end if;
 
-                    elsif player_r = '0' and db_edge(B_JOKER1) = '1' and j1_av_v = '1' then
+                    elsif db_edge(B_JOKER1) = '1' and j1_av_v = '1' then
                         -- reroll max_tk to 2..9; clamp sel if now too high
                         nm       := resize(unsigned(rnd(2 downto 0)), 4) + 2;
                         max_tk_r <= nm;
                         if sel_r > nm then sel_r <= nm; end if;
-                        -- player_r='0' guaranteed in this branch, so only P1's flag
-                        j1_p1 <= '0';
+                        -- clear the active player's joker-1 flag
+                        if player_r = '0' then j1_p1 <= '0'; else j1_p2 <= '0'; end if;
 
-                    elsif player_r = '0' and db_edge(B_JOKER2) = '1' and j2_av_v = '1' then
+                    elsif db_edge(B_JOKER2) = '1' and j2_av_v = '1' then
                         -- add or remove 1..4 sticks; direction from rnd(3)
                         delta := resize(unsigned(rnd(1 downto 0)), 3) + 1;
                         if rnd(3) = '0' then
@@ -184,21 +161,19 @@ begin
                         end if;
                         sticks_r <= ns_v;
                         if resize(sel_r, 6) > ns_v then sel_r <= ns_v(3 downto 0); end if;
-                        -- player_r='0' guaranteed; only P1's flag
-                        j2_p1 <= '0';
+                        -- clear the active player's joker-2 flag
+                        if player_r = '0' then j2_p1 <= '0'; else j2_p2 <= '0'; end if;
 
-                    -- Shared confirm path:
-                    --   bot   : player_r='1' → fires automatically every cycle of its turn
-                    --   human : player_r='0' and B_CONFIRM pressed (single-cycle db_edge pulse;
-                    --           holding CONFIRM does NOT re-fire thanks to nim_debounce)
-                    elsif player_r = '1' or db_edge(B_CONFIRM) = '1' then
-                        if sticks_r <= resize(eff_sel, 6) then
+                    elsif db_edge(B_CONFIRM) = '1' then
+                        -- human confirm: single-cycle pulse from nim_debounce
+                        -- (holding CONFIRM does not re-fire)
+                        if sticks_r <= resize(sel_r, 6) then
                             -- last stick(s) taken → misère: flip player then go to WIN
                             player_r <= not player_r;
                             state_r  <= S_WIN;
                         else
                             -- normal turn: remove sticks, reset sel to 1, swap player
-                            sticks_r <= sticks_r - resize(eff_sel, 6);
+                            sticks_r <= sticks_r - resize(sel_r, 6);
                             sel_r    <= to_unsigned(1, 4);
                             player_r <= not player_r;
                         end if;

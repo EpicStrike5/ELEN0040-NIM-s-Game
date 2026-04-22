@@ -16,9 +16,10 @@
 --                  press() drives '0' (pin shorted to GND = pressed), then
 --                  releases to '1'. This matches real hardware behaviour.
 --
--- Bot timing : the bot acts on the FIRST clk1 cycle of its turn (no delay
---              counter in this build — removed to save LEs). After each human
---              CONFIRM, wait_cycles(3) is enough for the bot to have acted.
+-- Two-player : the bot has been temporarily removed to free LEs for the idle
+--              carousel. Both turns are driven by this stimulus process.
+--              wait_cycles(3) after each CONFIRM is generous slack; the state
+--              transition happens on the very next clk1 rising edge.
 --
 -- How to run in Questa:
 --   do compile.do
@@ -153,10 +154,9 @@ begin
         wait_cycles(3);
 
         -- ----------------------------------------------------------------
-        -- Phase 2: human takes 2 sticks (UP then CONFIRM)
-        -- After CONFIRM the bot acts on the next clk1 cycle; wait 3 cycles.
+        -- Phase 2: P1 takes 2 sticks (UP then CONFIRM); P2's turn begins.
         -- ----------------------------------------------------------------
-        report "Phase 2: human UP CONFIRM; bot auto-acts next cycle" severity note;
+        report "Phase 2: P1 UP CONFIRM; P2 turn begins" severity note;
         press(btn_up);
         wait_cycles(1);
         press(btn_confirm);
@@ -267,7 +267,7 @@ begin
 
         -- ----------------------------------------------------------------
         -- Phase 6: grind remaining sticks to reach S_WIN
-        -- Human takes max sticks each turn; bot takes random 1..min(4,max_tk).
+        -- Both players take max sticks each turn (testbench drives both).
         -- Loop runs past S_WIN safely (extra presses ignored in S_WIN / S_IDLE).
         -- ----------------------------------------------------------------
         report "Phase 6: grinding to S_WIN" severity note;

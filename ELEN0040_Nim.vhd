@@ -19,10 +19,11 @@
 --          led_j1      -- joker 1 available for active human player
 --          led_j2      -- joker 2 available for active human player
 --
--- Carousel : in S_IDLE the SR chain shows an animated fill 0→40→0 instead of
---            static 21 sticks. the bounce counter (anim_r) is driven by clk1
---            so the animation speed tracks the game-clock potentiometer.
---            A 6-bit counter + direction bit + mux adds ~20 LEs.
+-- Carousel : in S_IDLE the SR chain shows a fill animation instead of static
+--            sticks. anim_r is a plain 6-bit up-counter (0→63 natural overflow)
+--            driven by clk1: 0-40 LEDs fill up; 41-63 all 40 LEDs on (hold);
+--            snap dark at the 63→0 wrap, then repeat.
+--            Counter + mux ≈ 14 LEs (no direction bit, no comparators).
 --
 -- Bot note : P2 is always played by the internal bot (no bot_en port).
 --            The bot fires automatically whenever player_r='1' in S_PLAY.
@@ -82,9 +83,9 @@ architecture rtl of ELEN0040_Nim is
     signal j1_av_s   : std_logic;
     signal j2_av_s   : std_logic;
 
-    -- carousel: bounce counter 0↔40 on clk1, used in place of sticks_s in S_IDLE
+    -- carousel: plain 6-bit up-counter (0→63, natural overflow) driven by clk1.
+    -- No direction bit and no comparators needed — saves ~19 LEs vs a bounce counter.
     signal anim_r      : unsigned(5 downto 0) := (others => '0');
-    signal anim_dir_r  : std_logic := '0';       -- '0' = counting up, '1' = counting down
     signal sr_sticks_s : unsigned(5 downto 0);   -- mux: anim in S_IDLE, sticks_s otherwise
 
     component nim_debounce is
@@ -134,35 +135,19 @@ begin
     end process;
 
     -- ----------------------------------------------------------------
-    -- Idle carousel: bounce anim_r between 0 and 40 on every clk1 tick.
-    -- Gives a fill-then-drain sweep of the 40-LED bar array while in S_IDLE.
-    -- Speed tracks the clk1 potentiometer (e.g. 4 Hz → 0→40→0 in ~20 s).
-    -- Counter resets to 0 whenever state leaves S_IDLE so it always starts
-    -- from empty when returning to idle after a game.
+    -- Idle carousel: anim_r counts 0→63 (natural 6-bit overflow) every clk1 tick.
+    --   0-40  : 0→40 LEDs light up (fill)
+    --   41-63 : all 40 LEDs on      (brief hold — values > 40 saturate the display)
+    --   63→0  : snap dark, repeat
+    -- Counter resets to 0 when a game is running so IDLE always starts from dark.
     -- ----------------------------------------------------------------
     process(clk1)
     begin
         if rising_edge(clk1) then
             if state_s /= S_IDLE then
-                -- game is running or just ended: hold counter at 0 ready for next idle
-                anim_r    <= (others => '0');
-                anim_dir_r <= '0';
-            elsif anim_dir_r = '0' then
-                -- counting up: increment until 40, then reverse
-                if anim_r = 40 then
-                    anim_dir_r <= '1';
-                    anim_r     <= anim_r - 1;
-                else
-                    anim_r <= anim_r + 1;
-                end if;
+                anim_r <= (others => '0');  -- hold at zero during play / win
             else
-                -- counting down: decrement until 0, then reverse
-                if anim_r = 0 then
-                    anim_dir_r <= '0';
-                    anim_r     <= anim_r + 1;
-                else
-                    anim_r <= anim_r - 1;
-                end if;
+                anim_r <= anim_r + 1;       -- free-run; 63 overflows to 0 naturally
             end if;
         end if;
     end process;
