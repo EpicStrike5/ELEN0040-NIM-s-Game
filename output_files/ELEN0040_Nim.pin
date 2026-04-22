@@ -84,7 +84,7 @@ led_j2                       : 18        : output : 3.3-V LVTTL       :         
 led_j1                       : 19        : output : 3.3-V LVTTL       :         : 1         : Y              
 led_p2                       : 20        : output : 3.3-V LVTTL       :         : 1         : Y              
 led_p1                       : 21        : output : 3.3-V LVTTL       :         : 1         : Y              
-GND*                         : 22        :        :                   :         : 1         :                
+btn_reset                    : 22        : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 23        : power  :                   : 3.3V    : 1         :                
 sr_latch                     : 24        : output : 3.3-V LVTTL       :         : 1         : Y              
 sr_clk                       : 25        : output : 3.3-V LVTTL       :         : 1         : Y              
@@ -100,7 +100,7 @@ GND*                         : 34        :        :                   :         
 GND*                         : 35        :        :                   :         : 2         :                
 GND*                         : 36        :        :                   :         : 2         :                
 GND*                         : 37        :        :                   :         : 2         :                
-btn_reset                    : 38        : input  : 3.3-V LVTTL       :         : 2         : N              
+GND*                         : 38        :        :                   :         : 2         :                
 VCCIO2                       : 39        : power  :                   : 3.3V    : 2         :                
 GND*                         : 40        :        :                   :         : 2         :                
 VCCINT                       : 41        : power  :                   : 1.8V    :           :                

@@ -25,8 +25,8 @@
 --            snap dark at the 63→0 wrap, then repeat.
 --            Counter + mux ≈ 14 LEs (no direction bit, no comparators).
 --
--- Bot note : P2 is always played by the internal bot (no bot_en port).
---            The bot fires automatically whenever player_r='1' in S_PLAY.
+-- Two-player : both P1 and P2 are human; player_r in nim_fsm tracks whose
+--              turn it is. Both players share the same physical buttons.
 -- ///
 
 library IEEE;
@@ -206,7 +206,7 @@ begin
               not player_s when  state_s = S_PLAY                      else
               '0';
 
-    -- led_p2: blinks in WIN if P2/bot won, on in IDLE, on in PLAY when bot is active
+    -- led_p2: blinks in WIN if P2 won, on in IDLE, on in PLAY when P2 is active
     led_p2 <= blink_ff  when (state_s = S_WIN  and winner_s = '1') else
               '1'        when  state_s = S_IDLE                      else
               player_s   when  state_s = S_PLAY                      else

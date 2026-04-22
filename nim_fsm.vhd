@@ -1,34 +1,34 @@
 -- ///
 -- file : nim_fsm.vhd
 --
--- Main purpose : game state machine. controls stick count, turn order,
---               player selection, joker effects, and synchronous reset.
---               clocked by clk1.
+-- Main purpose : game state machine for two-player Nim. controls stick count,
+--               turn order, player selection, joker effects, and synchronous
+--               reset. clocked by clk1.
 --
 -- Input  : clk1    -- game clock (0.7-48 Hz)
---          rst     -- synchronous reset: returns to S_IDLE from any state
---          rnd     -- 7-bit random value from nim_sr (sr_cnt wire)
+--          rst     -- synchronous reset (active-high): returns to S_IDLE
+--          rnd     -- 7-bit snapshot of sr_cnt (free-running at clk0 speed)
 --          db_edge -- one-cycle button pulses from nim_debounce
 --
 -- Output : sticks  -- remaining stick count
 --          max_tk  -- max sticks the active player may take this turn
 --          sel     -- current player selection (1..max_tk)
---          player  -- active player (0=P1, 1=P2)
+--          player  -- whose turn it is (0=P1, 1=P2)
 --          winner  -- winning player after game ends
 --          state   -- current FSM state (S_IDLE, S_PLAY, S_WIN)
---          j1_av   -- joker 1 still available for active player
---          j2_av   -- joker 2 still available for active player
+--          j1_av   -- joker 1 still available for the active player
+--          j2_av   -- joker 2 still available for the active player
 --
--- Two-player mode: bot temporarily removed to stay within 160 LEs with the
---   carousel animation. Both P1 and P2 are human; player_r indicates whose
---   turn it is. Both players share the same physical buttons and can use jokers.
---   To re-add the bot: restore the bot_take/eff_sel variables in S_PLAY and
---   add back `player_r='0'` guards on human-button branches.
+-- Randomness: rnd is sampled at the exact clk1 cycle that db_edge fires.
+--   sr_cnt free-runs at clk0 (59-320 Hz) through 0-127, so its value at
+--   any human-initiated event is unpredictable.
+--   On START: rnd(0) picks first player; rnd(4:0)+9 sets sticks (9-40).
+--   On JOKER1: rnd(2:0) rerolls max_tk (2-9).
+--   On JOKER2: rnd(3) picks add/remove; rnd(1:0) picks amount (1-4).
 --
--- Edge cases handled:
---   Hold CONFIRM : db_edge is a single-cycle pulse from nim_debounce;
---                  holding the button only fires the FSM once. (by design)
---   Simultaneous : priority is UP > DOWN > JOKER1 > JOKER2 > CONFIRM.
+-- Edge cases:
+--   Hold CONFIRM : db_edge is a one-cycle pulse; holding does not retrigger.
+--   Simultaneous : priority UP > DOWN > JOKER1 > JOKER2 > CONFIRM.
 -- ///
 
 library IEEE;
@@ -56,7 +56,7 @@ end nim_fsm;
 
 architecture rtl of nim_fsm is
 
-    signal sticks_r : unsigned(5 downto 0) := to_unsigned(21, 6);
+    signal sticks_r : unsigned(5 downto 0) := (others => '0');  -- set by START via rnd
     signal max_tk_r : unsigned(3 downto 0) := to_unsigned(3,  4);
     signal sel_r    : unsigned(3 downto 0) := to_unsigned(1,  4);
     signal player_r : std_logic := '0';
@@ -113,12 +113,13 @@ begin
                 when S_IDLE =>
                 -- -----------------------------------------------------------------
                     if db_edge(B_START) = '1' then
-                        -- rnd(0) picks the first player randomly at press time
-                        player_r <= rnd(0);
-                        sticks_r <= to_unsigned(21, 6);
+                        -- Snapshot rnd the instant START is pressed.
+                        -- sr_cnt free-runs at clk0 through 0-127, so the value
+                        -- is unpredictable to the player.
+                        player_r <= rnd(0);                                    -- 0=P1, 1=P2
+                        sticks_r <= resize(unsigned(rnd(4 downto 0)), 6) + 9;  -- 9-40 sticks
                         max_tk_r <= to_unsigned(3, 4);
                         sel_r    <= to_unsigned(1, 4);
-                        -- reset all four joker flags for a fresh game
                         j1_p1 <= '1'; j1_p2 <= '1';
                         j2_p1 <= '1'; j2_p2 <= '1';
                         state_r <= S_PLAY;

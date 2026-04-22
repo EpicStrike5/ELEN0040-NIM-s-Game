@@ -2,7 +2,7 @@
 -- file : tb_ELEN0040_Nim.vhd
 --
 -- Main purpose : simulation testbench for the full Nim game top-level.
---               covers normal gameplay with bot auto-play, synchronous reset,
+--               covers normal two-player gameplay, synchronous reset,
 --               and two specific edge cases:
 --                 (1) holding CONFIRM for multiple cycles -> must fire only once
 --                 (2) pressing UP and CONFIRM simultaneously -> UP wins (priority)
@@ -145,9 +145,8 @@ begin
         wait_cycles(5);
 
         -- ----------------------------------------------------------------
-        -- Phase 1: start the game
-        -- rnd(0) picks the first player randomly. If bot goes first it acts
-        -- on the very first S_PLAY cycle; wait 3 cycles to cover that.
+        -- Phase 1: start the game.
+        -- rnd(0) picks P1 or P2 first; "01"&rnd(3:0) sets sticks (16-31).
         -- ----------------------------------------------------------------
         report "Phase 1: START game" severity note;
         press(btn_start);
@@ -189,8 +188,7 @@ begin
         wait_cycles(1);
         press_hold(btn_confirm, 5);
         wait_cycles(1);
-        -- sel should have reset to 1 (confirm fired once, player switched to bot)
-        -- bot acts in the same cycle, then player switches back to human
+        -- sel should have reset to 1: confirm fired exactly once, turn switched
         wait_cycles(2);
         assert bcd_sel = "0001"
             report "EDGE CASE 1 FAIL: bcd_sel=" &
@@ -258,9 +256,9 @@ begin
         -- ----------------------------------------------------------------
         report "Phase 5: second game START - verify joker reset" severity note;
         press(btn_start);
-        wait_cycles(3);         -- allow for bot-first case
+        wait_cycles(3);
 
-        press(btn_joker1);      -- should work: j1_p1 was reset on START
+        press(btn_joker1);      -- should work: joker flags reset by START
         wait_cycles(2);
         press(btn_confirm);
         wait_cycles(3);

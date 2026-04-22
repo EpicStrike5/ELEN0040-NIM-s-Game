@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ELEN0040_Nim
-Wed Apr 22 11:55:25 2026
+Wed Apr 22 12:46:10 2026
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -44,7 +44,7 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +-----------------------------+------------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Wed Apr 22 11:55:25 2026          ;
+; Analysis & Synthesis Status ; Successful - Wed Apr 22 12:46:10 2026          ;
 ; Quartus Prime Version       ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name               ; ELEN0040_Nim                                   ;
 ; Top-level Entity Name       ; ELEN0040_Nim                                   ;
@@ -167,9 +167,9 @@ https://fpgasoftware.intel.com/eula.
 ;     -- Combinational with a register        ; 36                                ;
 ;                                             ;                                   ;
 ; Logic element usage by number of LUT inputs ;                                   ;
-;     -- 4 input functions                    ; 72                                ;
-;     -- 3 input functions                    ; 31                                ;
-;     -- 2 input functions                    ; 38                                ;
+;     -- 4 input functions                    ; 70                                ;
+;     -- 3 input functions                    ; 34                                ;
+;     -- 2 input functions                    ; 37                                ;
 ;     -- 1 input functions                    ; 9                                 ;
 ;     -- 0 input functions                    ; 0                                 ;
 ;                                             ;                                   ;
@@ -178,16 +178,16 @@ https://fpgasoftware.intel.com/eula.
 ;     -- arithmetic mode                      ; 30                                ;
 ;     -- qfbk mode                            ; 0                                 ;
 ;     -- register cascade mode                ; 0                                 ;
-;     -- synchronous clear/load mode          ; 13                                ;
+;     -- synchronous clear/load mode          ; 16                                ;
 ;     -- asynchronous clear/load mode         ; 0                                 ;
 ;                                             ;                                   ;
 ; Total registers                             ; 44                                ;
 ; Total logic cells in carry chains           ; 36                                ;
 ; I/O pins                                    ; 24                                ;
 ; Maximum fan-out node                        ; nim_fsm:u_fsm|state_r.state_bit_0 ;
-; Maximum fan-out                             ; 34                                ;
-; Total fan-out                               ; 559                               ;
-; Average fan-out                             ; 3.07                              ;
+; Maximum fan-out                             ; 35                                ;
+; Total fan-out                               ; 565                               ;
+; Average fan-out                             ; 3.10                              ;
 +---------------------------------------------+-----------------------------------+
 
 
@@ -222,8 +222,8 @@ Encoding Type:  Sequential Encoding
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
 ; Total registers                              ; 44    ;
-; Number of registers using Synchronous Clear  ; 13    ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Clear  ; 11    ;
+; Number of registers using Synchronous Load   ; 5     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 13    ;
@@ -231,23 +231,20 @@ Encoding Type:  Sequential Encoding
 +----------------------------------------------+-------+
 
 
-+---------------------------------------------------+
-; Inverted Register Statistics                      ;
-+-----------------------------------------+---------+
-; Inverted Register                       ; Fan out ;
-+-----------------------------------------+---------+
-; nim_fsm:u_fsm|max_tk_r[0]               ; 2       ;
-; nim_fsm:u_fsm|max_tk_r[1]               ; 2       ;
-; nim_fsm:u_fsm|sel_r[0]                  ; 11      ;
-; nim_fsm:u_fsm|j1_p1                     ; 3       ;
-; nim_fsm:u_fsm|j1_p2                     ; 3       ;
-; nim_fsm:u_fsm|j2_p1                     ; 3       ;
-; nim_fsm:u_fsm|j2_p2                     ; 3       ;
-; nim_fsm:u_fsm|sticks_r[2]               ; 7       ;
-; nim_fsm:u_fsm|sticks_r[4]               ; 5       ;
-; nim_fsm:u_fsm|sticks_r[0]               ; 6       ;
-; Total number of inverted registers = 10 ;         ;
-+-----------------------------------------+---------+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; nim_fsm:u_fsm|max_tk_r[0]              ; 2       ;
+; nim_fsm:u_fsm|max_tk_r[1]              ; 2       ;
+; nim_fsm:u_fsm|sel_r[0]                 ; 11      ;
+; nim_fsm:u_fsm|j1_p1                    ; 3       ;
+; nim_fsm:u_fsm|j1_p2                    ; 3       ;
+; nim_fsm:u_fsm|j2_p1                    ; 3       ;
+; nim_fsm:u_fsm|j2_p2                    ; 3       ;
+; Total number of inverted registers = 7 ;         ;
++----------------------------------------+---------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -256,10 +253,10 @@ Encoding Type:  Sequential Encoding
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output              ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------+
 ; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|max_tk_r[3] ;
-; 7:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sticks_r[5] ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sticks_r[5] ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sticks_r[3] ;
 ; 9:1                ; 3 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sel_r[1]    ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|max_tk_r[0] ;
-; 7:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sticks_r[4] ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |ELEN0040_Nim|nim_fsm:u_fsm|ns_v        ;
 ; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |ELEN0040_Nim|nim_fsm:u_fsm|state_r     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------+
@@ -271,7 +268,7 @@ Encoding Type:  Sequential Encoding
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Wed Apr 22 11:55:18 2026
+    Info: Processing started: Wed Apr 22 12:46:02 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ELEN0040_Nim -c ELEN0040_Nim
 Info (16303): Aggressive Area optimization mode selected -- logic area will be prioritized at the potential cost of reduced timing performance
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -300,8 +297,8 @@ Info (21057): Implemented 182 device resources after synthesis - the final resou
     Info (21061): Implemented 158 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 4799 megabytes
-    Info: Processing ended: Wed Apr 22 11:55:25 2026
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:18
+    Info: Processing ended: Wed Apr 22 12:46:10 2026
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:19
 
 

@@ -91,3 +91,4 @@ set_location_assignment PIN_4 -to btn_up
 set_location_assignment PIN_5 -to btn_down
 set_location_assignment PIN_7 -to clk0
 set_location_assignment PIN_9 -to clk1
+set_location_assignment PIN_22 -to btn_reset
