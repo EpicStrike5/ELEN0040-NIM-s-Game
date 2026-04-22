@@ -6,12 +6,18 @@
 --               counter as a cheap random source for the FSM.
 --
 -- Input  : clk0   -- 59-320 Hz serialiser clock (set once via potentiometer)
---          sticks -- number of remaining sticks (from FSM)
+--          sticks -- number of LEDs to light (sticks remaining, or animation value)
 --
 -- Output : sr_data  -- serial data to first TLC6C598
 --          sr_clk   -- shift clock to all TLC6C598
 --          sr_latch -- latch pulse (one clk0 cycle wide) after full frame
 --          sr_rnd   -- 7-bit random value (sr_cnt wire, zero extra LEs)
+--
+-- Counter note : sr_cnt is a 7-bit free-running counter (0→127, natural
+--   overflow). Steps 0-79 clock SR data, step 80 pulses latch, steps 81-127
+--   are idle. Free-running gives a 128-cycle period, so sr_rnd cycles through
+--   all 128 values — longer period than the old 82-cycle reset scheme, which
+--   made rnd(0) predictable if START was pressed at a fixed time after power-on.
 -- ///
 
 library IEEE;
@@ -69,8 +75,10 @@ begin
                 sr_cnt   <= sr_cnt + 1;
 
             else
-                -- step 81: reset counter to start next frame
-                sr_cnt <= (others => '0');
+                -- steps 81-127: idle cycles; sr_cnt keeps counting (no explicit
+                -- reset) so it wraps naturally at 127→0. This extends the random
+                -- period from 82 to 128 without any extra logic.
+                sr_cnt <= sr_cnt + 1;
             end if;
 
         end if;

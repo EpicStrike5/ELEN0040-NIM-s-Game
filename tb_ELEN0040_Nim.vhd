@@ -2,13 +2,23 @@
 -- file : tb_ELEN0040_Nim.vhd
 --
 -- Main purpose : simulation testbench for the full Nim game top-level.
---               runs a scripted 10-phase game covering every button,
---               both players, all four joker uses, and a second game
---               to verify joker flag reset. do NOT add to Quartus synthesis.
+--               covers normal gameplay with bot auto-play, synchronous reset,
+--               and two specific edge cases:
+--                 (1) holding CONFIRM for multiple cycles -> must fire only once
+--                 (2) pressing UP and CONFIRM simultaneously -> UP wins (priority)
+--               do NOT add this file to Quartus synthesis.
 --
--- Input  : none (self-contained; clocks and stimuli generated internally)
+-- Input  : none (self-contained)
 --
--- Output : none (waveforms observed in Questa; stop(0) ends simulation cleanly)
+-- Output : none (observe waveforms in Questa; stop(0) ends cleanly)
+--
+-- Button polarity : all btn_* default to '1' (pin pulled high = not pressed).
+--                  press() drives '0' (pin shorted to GND = pressed), then
+--                  releases to '1'. This matches real hardware behaviour.
+--
+-- Bot timing : the bot acts on the FIRST clk1 cycle of its turn (no delay
+--              counter in this build — removed to save LEs). After each human
+--              CONFIRM, wait_cycles(3) is enough for the bot to have acted.
 --
 -- How to run in Questa:
 --   do compile.do
@@ -30,12 +40,17 @@ architecture sim of tb_ELEN0040_Nim is
 
     signal clk0        : std_logic := '0';
     signal clk1        : std_logic := '0';
-    signal btn_start   : std_logic := '0';
-    signal btn_joker1  : std_logic := '0';
-    signal btn_joker2  : std_logic := '0';
-    signal btn_confirm : std_logic := '0';
-    signal btn_up      : std_logic := '0';
-    signal btn_down    : std_logic := '0';
+
+    -- All buttons default '1' (not pressed = pin pulled high by RC).
+    -- Driving '0' simulates the button shorting the pin to GND.
+    signal btn_start   : std_logic := '1';
+    signal btn_joker1  : std_logic := '1';
+    signal btn_joker2  : std_logic := '1';
+    signal btn_confirm : std_logic := '1';
+    signal btn_up      : std_logic := '1';
+    signal btn_down    : std_logic := '1';
+    signal btn_reset   : std_logic := '1';
+
     signal sr_data     : std_logic;
     signal sr_clk      : std_logic;
     signal sr_latch    : std_logic;
@@ -46,7 +61,7 @@ architecture sim of tb_ELEN0040_Nim is
     signal led_j1      : std_logic;
     signal led_j2      : std_logic;
 
-    -- clocks sped up for simulation; ratio 30:1 matches real board (clk0/clk1)
+    -- clocks sped up for simulation; 30:1 ratio matches the real board
     constant T0 : time :=  10 ns;
     constant T1 : time := 300 ns;
 
@@ -62,6 +77,7 @@ begin
             btn_confirm => btn_confirm,
             btn_up      => btn_up,
             btn_down    => btn_down,
+            btn_reset   => btn_reset,
             sr_data     => sr_data,
             sr_clk      => sr_clk,
             sr_latch    => sr_latch,
@@ -73,28 +89,42 @@ begin
             led_j2      => led_j2
         );
 
-    -- free-running clocks
     clk0 <= not clk0 after T0 / 2;
     clk1 <= not clk1 after T1 / 2;
 
-    -- safety net: kills simulation if stimulus hangs unexpectedly
+    -- safety net: kills simulation if stimulus process hangs unexpectedly
     timeout : process
     begin
-        wait for 10 ms;
+        wait for 20 ms;
         report "TIMEOUT: simulation did not finish normally" severity failure;
     end process;
 
     stim : process
 
-        -- assert button on the falling edge, release after the next rising edge
-        -- this guarantees nim_debounce sees exactly one rising edge per press
+        -- Simulate one button press (active-low):
+        --   drive '0' on the falling edge → nim_debounce sees a rising edge on raw
+        --   release '1' after one period → db_edge fires for exactly ONE clk1 cycle
         procedure press(signal btn : out std_logic) is
         begin
             wait until falling_edge(clk1);
-            btn <= '1';
+            btn <= '0';
             wait until rising_edge(clk1);
             wait until falling_edge(clk1);
+            btn <= '1';
+        end procedure;
+
+        -- Hold a button pressed for `hold_cycles` clk1 periods then release.
+        -- Used to verify that nim_debounce only generates ONE db_edge pulse
+        -- regardless of hold duration (the 0->1 edge fires once, subsequent
+        -- cycles see raw='1' and prev_raw='1', so db_edge='0').
+        procedure press_hold(signal btn : out std_logic; hold_cycles : integer) is
+        begin
+            wait until falling_edge(clk1);
             btn <= '0';
+            for i in 1 to hold_cycles loop
+                wait until falling_edge(clk1);
+            end loop;
+            btn <= '1';
         end procedure;
 
         procedure wait_cycles(n : integer) is
@@ -106,70 +136,161 @@ begin
 
     begin
 
-        -- Phase 0: power-on IDLE (both player LEDs on, joker LEDs off)
-        report "Phase 0: IDLE" severity note;
+        -- ----------------------------------------------------------------
+        -- Phase 0: power-on IDLE
+        -- Expected: led_p1='1', led_p2='1' (both on), joker LEDs off.
+        -- ----------------------------------------------------------------
+        report "Phase 0: IDLE - both player LEDs should be ON" severity note;
         wait_cycles(5);
 
-        -- Phase 1: START -> sticks=21, max_tk=3, sel=1, all joker flags = 1
-        report "Phase 1: START" severity note;
+        -- ----------------------------------------------------------------
+        -- Phase 1: start the game
+        -- rnd(0) picks the first player randomly. If bot goes first it acts
+        -- on the very first S_PLAY cycle; wait 3 cycles to cover that.
+        -- ----------------------------------------------------------------
+        report "Phase 1: START game" severity note;
         press(btn_start);
+        wait_cycles(3);
+
+        -- ----------------------------------------------------------------
+        -- Phase 2: human takes 2 sticks (UP then CONFIRM)
+        -- After CONFIRM the bot acts on the next clk1 cycle; wait 3 cycles.
+        -- ----------------------------------------------------------------
+        report "Phase 2: human UP CONFIRM; bot auto-acts next cycle" severity note;
+        press(btn_up);
+        wait_cycles(1);
+        press(btn_confirm);
+        wait_cycles(3);
+
+        -- ----------------------------------------------------------------
+        -- Phase 3: human uses Joker 1 then confirms
+        -- max_tk rerolled to 2..9; j1_p1 cleared; led_j1 goes low after press.
+        -- ----------------------------------------------------------------
+        report "Phase 3: human JOKER1 then CONFIRM" severity note;
+        press(btn_joker1);
         wait_cycles(2);
+        press(btn_confirm);
+        wait_cycles(3);
 
-        -- Phase 2: Player A takes 3 sticks (UP UP CONFIRM) -> sticks 21->18
-        report "Phase 2: Turn 1 (P_A) UP UP CONFIRM -> sticks 21->18" severity note;
-        press(btn_up);      wait_cycles(1);
-        press(btn_up);      wait_cycles(1);
-        press(btn_confirm); wait_cycles(2);
+        -- ----------------------------------------------------------------
+        -- EDGE CASE 1: hold CONFIRM for 5 clk1 cycles
+        --
+        -- How it is handled:
+        --   nim_debounce: db_edge = raw AND NOT prev_raw.
+        --   Cycle 0: btn goes '0' → raw rises to '1', prev_raw='0' → db_edge='1' (fires once).
+        --   Cycles 1-4: raw='1', prev_raw='1' → db_edge='0' (no retrigger).
+        --   FSM sees CONFIRM exactly once regardless of hold duration.
+        --
+        -- Expected: bcd_sel = "0001" (sel reset to 1) after the hold, confirming
+        --           the FSM processed the confirm only once. Bot then acts.
+        -- ----------------------------------------------------------------
+        report "EDGE CASE 1: hold CONFIRM 5 cycles - must fire once" severity note;
+        press(btn_up);          -- ensure sel=2 so the confirm is clearly visible
+        wait_cycles(1);
+        press_hold(btn_confirm, 5);
+        wait_cycles(1);
+        -- sel should have reset to 1 (confirm fired once, player switched to bot)
+        -- bot acts in the same cycle, then player switches back to human
+        wait_cycles(2);
+        assert bcd_sel = "0001"
+            report "EDGE CASE 1 FAIL: bcd_sel=" &
+                   integer'image(to_integer(unsigned(bcd_sel))) &
+                   " expected 1 — confirm may have fired multiple times"
+            severity warning;
+        report "EDGE CASE 1: bcd_sel=" & integer'image(to_integer(unsigned(bcd_sel))) &
+               " (expected 1 = fired once)" severity note;
+        wait_cycles(1);
 
-        -- Phase 3: Player B uses Joker 1 -> max_tk rerolled; j1 flag for P_B cleared
-        report "Phase 3: Turn 2 (P_B) JOKER1 CONFIRM" severity note;
-        press(btn_joker1);  wait_cycles(2);
-        press(btn_confirm); wait_cycles(2);
+        -- ----------------------------------------------------------------
+        -- EDGE CASE 2: press UP and CONFIRM simultaneously
+        --
+        -- How it is handled:
+        --   Both btn_up and btn_confirm are driven '0' at the same falling edge.
+        --   nim_debounce raises both db_edge bits in the same clk1 cycle.
+        --   In nim_fsm S_PLAY the elsif chain checks UP before CONFIRM:
+        --     UP fires  → sel increments.
+        --     CONFIRM   → skipped (it is in a lower-priority elsif branch).
+        --   Result: sel increases by 1, player does NOT switch, sticks unchanged.
+        --
+        -- Expected: bcd_sel > 1 (UP fired), player LEDs unchanged (no turn switch).
+        -- ----------------------------------------------------------------
+        report "EDGE CASE 2: simultaneous UP + CONFIRM - only UP should fire" severity note;
+        wait until falling_edge(clk1);
+        btn_up      <= '0';     -- both driven low at exactly the same moment
+        btn_confirm <= '0';
+        wait until rising_edge(clk1);
+        wait until falling_edge(clk1);
+        btn_up      <= '1';
+        btn_confirm <= '1';
+        wait_cycles(2);
+        -- sel should be > 1 (UP fired), NOT = 1 (CONFIRM did not fire and reset it)
+        assert bcd_sel /= "0001"
+            report "EDGE CASE 2 FAIL: bcd_sel=1 implies CONFIRM fired - priority broken"
+            severity warning;
+        report "EDGE CASE 2: bcd_sel=" & integer'image(to_integer(unsigned(bcd_sel))) &
+               " (expected > 1 = UP fired, CONFIRM ignored)" severity note;
 
-        -- Phase 4: Player A uses Joker 1 -> max_tk rerolled; both j1 flags now 0
-        report "Phase 4: Turn 3 (P_A) JOKER1 CONFIRM" severity note;
-        press(btn_joker1);  wait_cycles(2);
-        press(btn_confirm); wait_cycles(2);
+        -- confirm the incremented selection normally to end the human's turn
+        press(btn_confirm);
+        wait_cycles(3);
 
-        -- Phase 5: Player B uses Joker 2 -> sticks +/-1..4; j2 flag for P_B cleared
-        report "Phase 5: Turn 4 (P_B) JOKER2 CONFIRM" severity note;
-        press(btn_joker2);  wait_cycles(2);
-        press(btn_confirm); wait_cycles(2);
+        -- ----------------------------------------------------------------
+        -- Phase 4: mid-game RESET test
+        -- Assert btn_reset during S_PLAY; FSM must return to S_IDLE immediately.
+        -- Expected: led_p1='1' and led_p2='1' (IDLE LED pattern).
+        -- ----------------------------------------------------------------
+        report "Phase 4: RESET mid-game - expect S_IDLE" severity note;
+        wait until falling_edge(clk1);
+        btn_reset <= '0';       -- assert reset (active-low pin)
+        wait_cycles(2);         -- hold for 2 clk1 cycles
+        btn_reset <= '1';       -- release
+        wait_cycles(2);
+        assert led_p1 = '1' and led_p2 = '1'
+            report "Phase 4 FAIL: not in IDLE after reset"
+            severity warning;
+        report "Phase 4: led_p1=" & std_logic'image(led_p1) &
+               " led_p2=" & std_logic'image(led_p2) &
+               " (both '1' = IDLE)" severity note;
 
-        -- Phase 6: Player A uses Joker 2 -> all four joker flags now 0
-        report "Phase 6: Turn 5 (P_A) JOKER2 CONFIRM" severity note;
-        press(btn_joker2);  wait_cycles(2);
-        press(btn_confirm); wait_cycles(2);
+        -- ----------------------------------------------------------------
+        -- Phase 5: second game - verify joker flags reset correctly on new START
+        -- Joker 1 should be available again immediately after START.
+        -- ----------------------------------------------------------------
+        report "Phase 5: second game START - verify joker reset" severity note;
+        press(btn_start);
+        wait_cycles(3);         -- allow for bot-first case
 
-        -- Phase 7: Player B tries Joker 1 again (already used -> ignored)
-        report "Phase 7: Turn 6 (P_B) JOKER1 re-press (no effect)" severity note;
-        press(btn_joker1);  wait_cycles(1);
-        press(btn_confirm); wait_cycles(2);
+        press(btn_joker1);      -- should work: j1_p1 was reset on START
+        wait_cycles(2);
+        press(btn_confirm);
+        wait_cycles(3);
 
-        -- Phase 8: grind remaining sticks with max takes until S_WIN
-        -- extra presses after S_WIN are silently ignored
-        report "Phase 8: grinding to S_WIN" severity note;
-        for turn in 1 to 15 loop
+        -- ----------------------------------------------------------------
+        -- Phase 6: grind remaining sticks to reach S_WIN
+        -- Human takes max sticks each turn; bot takes random 1..min(4,max_tk).
+        -- Loop runs past S_WIN safely (extra presses ignored in S_WIN / S_IDLE).
+        -- ----------------------------------------------------------------
+        report "Phase 6: grinding to S_WIN" severity note;
+        for turn in 1 to 25 loop
             press(btn_up);      wait_cycles(1);
             press(btn_up);      wait_cycles(1);
-            press(btn_confirm); wait_cycles(2);
+            press(btn_confirm); wait_cycles(3);
         end loop;
 
-        -- Phase 9: observe winner LED blinking, then press Start to go to S_IDLE
-        report "Phase 9: S_WIN - observe blink, then START" severity note;
-        wait_cycles(8);
+        -- ----------------------------------------------------------------
+        -- Phase 7: observe S_WIN then press START to return to IDLE
+        -- ----------------------------------------------------------------
+        report "Phase 7: S_WIN - observe winner blink, then START" severity note;
+        wait_cycles(6);
         press(btn_start);
         wait_cycles(3);
-
-        -- Phase 10: second game START -> verify joker flags reset (led_j1 should go high)
-        report "Phase 10: second START - verify joker reset" severity note;
-        press(btn_start);
-        wait_cycles(3);
-        press(btn_joker1);  wait_cycles(2);
-        press(btn_confirm); wait_cycles(2);
+        assert led_p1 = '1' and led_p2 = '1'
+            report "Phase 7 FAIL: not back in IDLE after WIN->START"
+            severity warning;
+        report "Phase 7: back in IDLE - led_p1=" & std_logic'image(led_p1) &
+               " led_p2=" & std_logic'image(led_p2) severity note;
 
         report "Simulation complete" severity note;
-        -- stop(0) terminates cleanly so Questa exits with status 0
         stop(0);
 
     end process;

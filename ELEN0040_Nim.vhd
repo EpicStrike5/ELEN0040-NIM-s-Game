@@ -8,14 +8,24 @@
 -- Input  : clk0        -- 59-320 Hz (LMC555, set via potentiometer)
 --          clk1        -- 0.7-48 Hz (LMC555, set via potentiometer)
 --          btn_*       -- active-low buttons (10k pull-up to VCCIO, pressed = GND)
+--          btn_reset   -- active-low reset (same RC pull-up); returns to S_IDLE
+--                         from any game state without needing to finish the game
 --
 -- Output : sr_data / sr_clk / sr_latch -- TLC6C598 chain (40 stick LEDs)
 --          bcd_max_tk  -- 4-bit BCD to CD4511 #1 (max sticks per turn)
 --          bcd_sel     -- 4-bit BCD to CD4511 #2 (current selection)
 --          led_p1      -- player 1 LED (both on=IDLE, active on=PLAY, blink=WIN)
---          led_p2      -- player 2 LED
---          led_j1      -- joker 1 available for active player (on=yes, off=no)
---          led_j2      -- joker 2 available for active player
+--          led_p2      -- player 2 / bot LED
+--          led_j1      -- joker 1 available for active human player
+--          led_j2      -- joker 2 available for active human player
+--
+-- Carousel : in S_IDLE the SR chain shows an animated fill 0→40→0 instead of
+--            static 21 sticks. the bounce counter (anim_r) is driven by clk1
+--            so the animation speed tracks the game-clock potentiometer.
+--            A 6-bit counter + direction bit + mux adds ~20 LEs.
+--
+-- Bot note : P2 is always played by the internal bot (no bot_en port).
+--            The bot fires automatically whenever player_r='1' in S_PLAY.
 -- ///
 
 library IEEE;
@@ -35,6 +45,7 @@ entity ELEN0040_Nim is
         btn_confirm : in  std_logic;
         btn_up      : in  std_logic;
         btn_down    : in  std_logic;
+        btn_reset   : in  std_logic;   -- abort game, return to S_IDLE immediately
 
         -- TLC6C598 shift register chain (40 stick LEDs)
         sr_data     : out std_logic;
@@ -49,7 +60,7 @@ entity ELEN0040_Nim is
         led_p1      : out std_logic;
         led_p2      : out std_logic;
 
-        -- Joker LEDs: on while active player still has that joker
+        -- Joker LEDs: on while active human player still has that joker
         led_j1      : out std_logic;
         led_j2      : out std_logic
     );
@@ -58,6 +69,7 @@ end ELEN0040_Nim;
 architecture rtl of ELEN0040_Nim is
 
     signal blink_ff  : std_logic := '0';
+    signal rst_s     : std_logic;
     signal sr_rnd_s  : std_logic_vector(6 downto 0);
     signal raw_btns  : std_logic_vector(5 downto 0);
     signal db_edge_s : std_logic_vector(5 downto 0);
@@ -69,6 +81,11 @@ architecture rtl of ELEN0040_Nim is
     signal state_s   : state_t;
     signal j1_av_s   : std_logic;
     signal j2_av_s   : std_logic;
+
+    -- carousel: bounce counter 0↔40 on clk1, used in place of sticks_s in S_IDLE
+    signal anim_r      : unsigned(5 downto 0) := (others => '0');
+    signal anim_dir_r  : std_logic := '0';       -- '0' = counting up, '1' = counting down
+    signal sr_sticks_s : unsigned(5 downto 0);   -- mux: anim in S_IDLE, sticks_s otherwise
 
     component nim_debounce is
         port (
@@ -92,6 +109,7 @@ architecture rtl of ELEN0040_Nim is
     component nim_fsm is
         port (
             clk1    : in  std_logic;
+            rst     : in  std_logic;
             rnd     : in  std_logic_vector(6 downto 0);
             db_edge : in  std_logic_vector(5 downto 0);
             sticks  : out unsigned(5 downto 0);
@@ -107,7 +125,7 @@ architecture rtl of ELEN0040_Nim is
 
 begin
 
-    -- blink_ff toggles every clk1 edge, giving a clk1/2 square wave for winner LED
+    -- blink_ff toggles every clk1 edge → clk1/2 square wave used for winner LED blink
     process(clk1)
     begin
         if rising_edge(clk1) then
@@ -115,7 +133,47 @@ begin
         end if;
     end process;
 
-    -- invert all six buttons: CPLD sees 0 when pressed, FSM expects active-high
+    -- ----------------------------------------------------------------
+    -- Idle carousel: bounce anim_r between 0 and 40 on every clk1 tick.
+    -- Gives a fill-then-drain sweep of the 40-LED bar array while in S_IDLE.
+    -- Speed tracks the clk1 potentiometer (e.g. 4 Hz → 0→40→0 in ~20 s).
+    -- Counter resets to 0 whenever state leaves S_IDLE so it always starts
+    -- from empty when returning to idle after a game.
+    -- ----------------------------------------------------------------
+    process(clk1)
+    begin
+        if rising_edge(clk1) then
+            if state_s /= S_IDLE then
+                -- game is running or just ended: hold counter at 0 ready for next idle
+                anim_r    <= (others => '0');
+                anim_dir_r <= '0';
+            elsif anim_dir_r = '0' then
+                -- counting up: increment until 40, then reverse
+                if anim_r = 40 then
+                    anim_dir_r <= '1';
+                    anim_r     <= anim_r - 1;
+                else
+                    anim_r <= anim_r + 1;
+                end if;
+            else
+                -- counting down: decrement until 0, then reverse
+                if anim_r = 0 then
+                    anim_dir_r <= '0';
+                    anim_r     <= anim_r + 1;
+                else
+                    anim_r <= anim_r - 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- In S_IDLE feed the carousel value to nim_sr; otherwise show real sticks.
+    sr_sticks_s <= anim_r when state_s = S_IDLE else sticks_s;
+
+    -- invert reset button: active-low pin → active-high rst signal for FSM
+    rst_s <= not btn_reset;
+
+    -- invert all six game buttons: CPLD sees 0 when pressed, FSM expects active-high
     -- bit order must match nim_pkg constants (B_START=0 .. B_DOWN=5)
     raw_btns <= (not btn_down) & (not btn_up) & (not btn_confirm) &
                 (not btn_joker2) & (not btn_joker1) & (not btn_start);
@@ -130,7 +188,7 @@ begin
     u_sr : nim_sr
         port map (
             clk0     => clk0,
-            sticks   => sticks_s,
+            sticks   => sr_sticks_s,  -- muxed: carousel in S_IDLE, real sticks otherwise
             sr_data  => sr_data,
             sr_clk   => sr_clk,
             sr_latch => sr_latch,
@@ -140,6 +198,7 @@ begin
     u_fsm : nim_fsm
         port map (
             clk1    => clk1,
+            rst     => rst_s,
             rnd     => sr_rnd_s,
             db_edge => db_edge_s,
             sticks  => sticks_s,
@@ -162,7 +221,7 @@ begin
               not player_s when  state_s = S_PLAY                      else
               '0';
 
-    -- led_p2: blinks in WIN if P2 won, on in IDLE, on in PLAY when P2 is active
+    -- led_p2: blinks in WIN if P2/bot won, on in IDLE, on in PLAY when bot is active
     led_p2 <= blink_ff  when (state_s = S_WIN  and winner_s = '1') else
               '1'        when  state_s = S_IDLE                      else
               player_s   when  state_s = S_PLAY                      else

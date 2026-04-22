@@ -1,13 +1,11 @@
-# =============================================================================
 # wave_setup.do  --  Questa wave window setup for ELEN0040_Nim simulation
 #
 # Usage (in Questa transcript after simulation loads):
-#   do wave_setup.do
+#   do compile.do
 #   restart -f
+#   do wave_setup.do
 #   run -all
-# =============================================================================
 
-# Clear existing wave window
 wave zoom full
 
 add wave -divider "--- CLOCKS ---"
@@ -21,6 +19,7 @@ add wave -color yellow /tb_elen0040_nim/btn_joker2
 add wave -color yellow /tb_elen0040_nim/btn_confirm
 add wave -color yellow /tb_elen0040_nim/btn_up
 add wave -color yellow /tb_elen0040_nim/btn_down
+add wave -color red    /tb_elen0040_nim/btn_reset
 
 add wave -divider "--- FSM STATE ---"
 add wave -color white  /tb_elen0040_nim/dut/u_fsm/state_r
@@ -28,6 +27,10 @@ add wave -color white  /tb_elen0040_nim/dut/u_fsm/player_r
 add wave -color white -format unsigned /tb_elen0040_nim/dut/u_fsm/sticks_r
 add wave -color white -format unsigned /tb_elen0040_nim/dut/u_fsm/sel_r
 add wave -color white -format unsigned /tb_elen0040_nim/dut/u_fsm/max_tk_r
+
+add wave -divider "--- IDLE CAROUSEL ---"
+add wave -color cyan -format unsigned /tb_elen0040_nim/dut/anim_r
+add wave -color cyan  /tb_elen0040_nim/dut/anim_dir_r
 
 add wave -divider "--- JOKER FLAGS (internal) ---"
 add wave -color orange /tb_elen0040_nim/dut/u_fsm/j1_p1
