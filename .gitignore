@@ -1,0 +1,30 @@
+# ---------------------------------------------------------------
+# Quartus Prime generated databases (rebuilt on every compilation)
+# ---------------------------------------------------------------
+db/
+incremental_db/
+greybox_tmp/
+
+# Compiled output (SOF, POF, RPT, etc.)
+output_files/
+
+# Simulation output
+simulation/
+*.wlf
+*.vcd
+
+# Nativelink / flow reports
+*.rpt
+*_nativelink_*.rpt
+
+# Quartus workspace (personal, not shared)
+*.qws
+
+# VHDL editor auto-backups
+*.bak
+
+# Miscellaneous Quartus temporaries
+*.qdf
+*.smsg
+*.done
+*.pin
