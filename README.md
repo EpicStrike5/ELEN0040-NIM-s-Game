@@ -11,7 +11,7 @@ Target device: **Intel MAX V 5M160ZE64C4** (160 macrocells, 64-pin EQFP).
 Misère variant of Nim:
 
 - The pile starts with a **random number of sticks (9–40)**, picked at game start.
-- Players alternate turns. On each turn a player takes between **1 and `max_take`** sticks (default: 3).
+- Players alternate turns. On each turn a player takes between **1 and `max_take`** sticks, the max is defined at random at the beginning of the game.
 - The player who takes the **last stick loses**.
 - Each player has **two one-use jokers** per game:
   - **Joker 1** — rerolls `max_take` to a random value in [4, 9]. Fires on button **release**.
@@ -34,17 +34,6 @@ Misère variant of Nim:
 
 ---
 
-## Resource usage
-
-Last confirmed synthesis (Quartus Prime Lite 23.1):
-
-| Resource | Used | Available |
-|---|---|---|
-| Logic elements | 134 | 160 |
-| I/O pins | 23 | 36 |
-
----
-
 ## How to open in Quartus
 
 1. Open `ELEN0040_Nim.qpf`.
@@ -52,13 +41,6 @@ Last confirmed synthesis (Quartus Prime Lite 23.1):
 3. Compile order in QSF: `nim_pkg` → `nim_debounce` → `nim_sr` → `nim_fsm` → `ELEN0040_Nim`.
 4. Run full compilation then program via JTAG.
 
-Recommended QSF settings (already included):
-```
-set_global_assignment -name OPTIMIZATION_MODE "Aggressive Area"
-set_global_assignment -name STATE_MACHINE_PROCESSING Sequential
-```
-
----
 
 ## How to simulate in Questa
 
@@ -68,9 +50,3 @@ restart -f
 do wave_setup.do
 run -all
 ```
-
----
-
-## Authors
-
-Thomas & Luca — ULiège, 2025–2026
