@@ -1,11 +1,11 @@
-Fitter Status : Successful - Wed Apr 22 12:46:12 2026
+Fitter Status : Successful - Fri May  1 19:43:37 2026
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : ELEN0040_Nim
 Top-level Entity Name : ELEN0040_Nim
 Family : MAX V
 Device : 5M160ZE64C4
 Timing Models : Final
-Total logic elements : 150 / 160 ( 94 % )
+Total logic elements : 160 / 160 ( 100 % )
 Total pins : 24 / 54 ( 44 % )
 Total virtual pins : 0
 UFM blocks : 0 / 1 ( 0 % )

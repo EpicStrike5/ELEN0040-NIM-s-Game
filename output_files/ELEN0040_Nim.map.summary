@@ -1,9 +1,9 @@
-Analysis & Synthesis Status : Successful - Wed Apr 22 12:46:10 2026
+Analysis & Synthesis Status : Successful - Fri May  1 19:43:35 2026
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : ELEN0040_Nim
 Top-level Entity Name : ELEN0040_Nim
 Family : MAX V
-Total logic elements : 158
+Total logic elements : 165
 Total pins : 24
 Total virtual pins : 0
 UFM blocks : 0 / 1 ( 0 % )

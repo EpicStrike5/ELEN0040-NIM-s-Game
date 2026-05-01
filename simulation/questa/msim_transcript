@@ -26,28 +26,28 @@
 # 
 # vcom -93 -work work {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd}
 # Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 10:32:56 on Apr 09,2026
+# Start time: 17:51:47 on May 01,2026
 # vcom -reportprogress 300 -93 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling package nim_pkg
-# End time: 10:32:57 on Apr 09,2026, Elapsed time: 0:00:01
+# End time: 17:51:47 on May 01,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd}
 # Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 10:32:57 on Apr 09,2026
+# Start time: 17:51:47 on May 01,2026
 # vcom -reportprogress 300 -93 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity nim_debounce
 # -- Compiling architecture rtl of nim_debounce
-# End time: 10:32:57 on Apr 09,2026, Elapsed time: 0:00:00
+# End time: 17:51:47 on May 01,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd}
 # Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 10:32:57 on Apr 09,2026
+# Start time: 17:51:47 on May 01,2026
 # vcom -reportprogress 300 -93 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -55,11 +55,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity nim_sr
 # -- Compiling architecture rtl of nim_sr
-# End time: 10:32:57 on Apr 09,2026, Elapsed time: 0:00:00
+# End time: 17:51:48 on May 01,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd}
 # Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 10:32:57 on Apr 09,2026
+# Start time: 17:51:48 on May 01,2026
 # vcom -reportprogress 300 -93 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -68,11 +68,11 @@
 # -- Loading package nim_pkg
 # -- Compiling entity nim_fsm
 # -- Compiling architecture rtl of nim_fsm
-# End time: 10:32:57 on Apr 09,2026, Elapsed time: 0:00:00
+# End time: 17:51:48 on May 01,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd}
 # Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 10:32:57 on Apr 09,2026
+# Start time: 17:51:48 on May 01,2026
 # vcom -reportprogress 300 -93 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -81,12 +81,12 @@
 # -- Loading package nim_pkg
 # -- Compiling entity ELEN0040_Nim
 # -- Compiling architecture rtl of ELEN0040_Nim
-# End time: 10:32:57 on Apr 09,2026, Elapsed time: 0:00:00
+# End time: 17:51:48 on May 01,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vcom -93 -work work {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd}
 # Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 10:32:57 on Apr 09,2026
+# Start time: 17:51:48 on May 01,2026
 # vcom -reportprogress 300 -93 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -94,16 +94,16 @@
 # -- Loading package NUMERIC_STD
 # -- Loading package nim_pkg
 # -- Loading package ENV
-# ** Warning: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd(28): (vcom-1516) Package "STD.ENV" does not exist in this language version.
+# ** Warning: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd(35): (vcom-1516) Package "STD.ENV" does not exist in this language version.
 # -- Compiling entity tb_ELEN0040_Nim
 # -- Compiling architecture sim of tb_ELEN0040_Nim
 # -- Loading entity ELEN0040_Nim
-# End time: 10:32:57 on Apr 09,2026, Elapsed time: 0:00:00
+# End time: 17:51:48 on May 01,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 1
 # 
 # vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L maxv -L rtl_work -L work -voptargs="+acc"  tb_ELEN0040_Nim
 # vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L maxv -L rtl_work -L work -voptargs=""+acc"" tb_ELEN0040_Nim 
-# Start time: 10:32:57 on Apr 09,2026
+# Start time: 17:51:48 on May 01,2026
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
 # ** Note: (vopt-143) Recognized 1 FSM in architecture body "nim_fsm(rtl)".
@@ -126,31 +126,659 @@
 # view signals
 # .main_pane.objects.interior.cs.body.tree
 # run -all
-# ** Note: Phase 0: IDLE -- both player LEDs ON, joker LEDs OFF
+# ** Note: Phase 0: IDLE - both player LEDs should be ON
 #    Time: 0 ps  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 1: START -- all jokers available (led_j1=1, led_j2=1)
+# ** Note: Phase 1: START game
 #    Time: 1350 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 2: Turn 1 (P_A) -- UP UP CONFIRM, sticks 21->18
-#    Time: 2250 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 3: Turn 2 (P_B) -- JOKER1 used, led_j1 goes LOW for P_B
+# ** Note: Phase 2: P1 UP CONFIRM; P2 turn begins
+#    Time: 2550 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 3: human JOKER1 then CONFIRM
 #    Time: 4350 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 4: Turn 3 (P_A) -- JOKER1 used, j1_PA cleared (j1_p1=j1_p2='0')
-#    Time: 6150 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 5: Turn 4 (P_B) -- JOKER2 used, led_j2 goes LOW for P_B
-#    Time: 7950 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 6: Turn 5 (P_A) -- JOKER2 used, all four j flags now '0'
+# ** Note: EDGE CASE 1: hold CONFIRM 5 cycles - must fire once
+#    Time: 6450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: bcd_sel=1 (expected 1 = fired once)
+#    Time: 9450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: simultaneous UP + CONFIRM - only UP should fire
 #    Time: 9750 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 7: Turn 6 (P_B) -- JOKER1 re-press ignored (already used)
-#    Time: 11550 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 8: grinding to S_WIN (UP UP CONFIRM loop)
+# ** Note: EDGE CASE 2: bcd_sel=2 (expected > 1 = UP fired, CONFIRM ignored)
+#    Time: 10650 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: RESET mid-game - expect S_IDLE
+#    Time: 11850 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: led_p1='1' led_p2='1' (both '1' = IDLE)
 #    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 9: S_WIN -- winner LED blinks, START to reset
-#    Time: 44550 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Phase 10: second game START -- verify joker flags reset to '1'
-#    Time: 48150 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# ** Note: Simulation complete -- all phases passed
-#    Time: 51150 ns  Iteration: 0  Instance: /tb_elen0040_nim
-# Break in Process stim at C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd line 254
+# ** Note: Phase 5: second game START - verify joker reset
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 6: grinding to S_WIN
+#    Time: 16350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: S_WIN - observe winner blink, then START
+#    Time: 76350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: back in IDLE - led_p1='1' led_p2='1'
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Simulation complete
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# Break in Process stim at C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd line 292
 # Causality operation skipped due to absence of debug database file
-# End time: 11:07:56 on Apr 09,2026, Elapsed time: 0:34:59
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/compile.do}
+# End time: 17:52:27 on May 01,2026, Elapsed time: 0:00:39
 # Errors: 0, Warnings: 1
+# 0
+# reading c:/intelfpga_lite/23.1std/questa_fse/win64/../modelsim.ini
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:28 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package nim_pkg
+# End time: 17:52:28 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:28 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity nim_debounce
+# -- Compiling architecture rtl of nim_debounce
+# End time: 17:52:28 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:28 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity nim_sr
+# -- Compiling architecture rtl of nim_sr
+# End time: 17:52:28 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:28 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity nim_fsm
+# -- Compiling architecture rtl of nim_fsm
+# End time: 17:52:28 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:28 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity ELEN0040_Nim
+# -- Compiling architecture rtl of ELEN0040_Nim
+# End time: 17:52:28 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:28 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Loading package ENV
+# -- Compiling entity tb_ELEN0040_Nim
+# -- Compiling architecture sim of tb_ELEN0040_Nim
+# -- Loading entity ELEN0040_Nim
+# End time: 17:52:28 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.tb_ELEN0040_Nim
+# vsim work.tb_ELEN0040_Nim 
+# Start time: 17:52:28 on May 01,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.nim_pkg
+# Loading std.env(body)
+# Loading work.tb_elen0040_nim(sim)#1
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/wave_setup.do}
+# ** Error: could not find wave window
+# Error in macro C:\Users\Thomas\Documents\Uliege\Digital Electronics\Projet\wave_setup.do line 9
+# could not find wave window
+#     while executing
+# "wave::zoomfull {*}$args"
+#     (procedure "::wave::zoom::full" line 2)
+#     invoked from within
+# "wave zoom full"
+run -all
+# ** Note: Phase 0: IDLE - both player LEDs should be ON
+#    Time: 0 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 1: START game
+#    Time: 1350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 2: P1 UP CONFIRM; P2 turn begins
+#    Time: 2550 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 3: human JOKER1 then CONFIRM
+#    Time: 4350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: hold CONFIRM 5 cycles - must fire once
+#    Time: 6450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: bcd_sel=1 (expected 1 = fired once)
+#    Time: 9450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: simultaneous UP + CONFIRM - only UP should fire
+#    Time: 9750 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: bcd_sel=2 (expected > 1 = UP fired, CONFIRM ignored)
+#    Time: 10650 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: RESET mid-game - expect S_IDLE
+#    Time: 11850 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: led_p1='1' led_p2='1' (both '1' = IDLE)
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 5: second game START - verify joker reset
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 6: grinding to S_WIN
+#    Time: 16350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: S_WIN - observe winner blink, then START
+#    Time: 76350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: back in IDLE - led_p1='1' led_p2='1'
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Simulation complete
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# Break in Process stim at C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd line 292
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/compile.do}
+# End time: 17:52:47 on May 01,2026, Elapsed time: 0:00:19
+# Errors: 1, Warnings: 0
+# 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:48 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package nim_pkg
+# End time: 17:52:48 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:48 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity nim_debounce
+# -- Compiling architecture rtl of nim_debounce
+# End time: 17:52:48 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:48 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity nim_sr
+# -- Compiling architecture rtl of nim_sr
+# End time: 17:52:48 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:48 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity nim_fsm
+# -- Compiling architecture rtl of nim_fsm
+# End time: 17:52:48 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:48 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity ELEN0040_Nim
+# -- Compiling architecture rtl of ELEN0040_Nim
+# End time: 17:52:48 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:52:48 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Loading package ENV
+# -- Compiling entity tb_ELEN0040_Nim
+# -- Compiling architecture sim of tb_ELEN0040_Nim
+# -- Loading entity ELEN0040_Nim
+# End time: 17:52:48 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.tb_ELEN0040_Nim
+# vsim work.tb_ELEN0040_Nim 
+# Start time: 17:52:48 on May 01,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.nim_pkg
+# Loading std.env(body)
+# Loading work.tb_elen0040_nim(sim)#1
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/wave_setup.do}
+# ** Error: could not find wave window
+# Error in macro C:\Users\Thomas\Documents\Uliege\Digital Electronics\Projet\wave_setup.do line 9
+# could not find wave window
+#     while executing
+# "wave::zoomfull {*}$args"
+#     (procedure "::wave::zoom::full" line 2)
+#     invoked from within
+# "wave zoom full"
+run -all
+# ** Note: Phase 0: IDLE - both player LEDs should be ON
+#    Time: 0 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 1: START game
+#    Time: 1350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 2: P1 UP CONFIRM; P2 turn begins
+#    Time: 2550 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 3: human JOKER1 then CONFIRM
+#    Time: 4350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: hold CONFIRM 5 cycles - must fire once
+#    Time: 6450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: bcd_sel=1 (expected 1 = fired once)
+#    Time: 9450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: simultaneous UP + CONFIRM - only UP should fire
+#    Time: 9750 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: bcd_sel=2 (expected > 1 = UP fired, CONFIRM ignored)
+#    Time: 10650 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: RESET mid-game - expect S_IDLE
+#    Time: 11850 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: led_p1='1' led_p2='1' (both '1' = IDLE)
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 5: second game START - verify joker reset
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 6: grinding to S_WIN
+#    Time: 16350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: S_WIN - observe winner blink, then START
+#    Time: 76350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: back in IDLE - led_p1='1' led_p2='1'
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Simulation complete
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# Break in Process stim at C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd line 292
+
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/compile.do}
+# End time: 17:55:35 on May 01,2026, Elapsed time: 0:02:47
+# Errors: 1, Warnings: 0
+# 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:55:35 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package nim_pkg
+# End time: 17:55:36 on May 01,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:55:36 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity nim_debounce
+# -- Compiling architecture rtl of nim_debounce
+# End time: 17:55:36 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:55:36 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity nim_sr
+# -- Compiling architecture rtl of nim_sr
+# End time: 17:55:36 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:55:36 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity nim_fsm
+# -- Compiling architecture rtl of nim_fsm
+# End time: 17:55:36 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:55:36 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity ELEN0040_Nim
+# -- Compiling architecture rtl of ELEN0040_Nim
+# End time: 17:55:36 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:55:36 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Loading package ENV
+# -- Compiling entity tb_ELEN0040_Nim
+# -- Compiling architecture sim of tb_ELEN0040_Nim
+# -- Loading entity ELEN0040_Nim
+# End time: 17:55:36 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.tb_ELEN0040_Nim
+# vsim work.tb_ELEN0040_Nim 
+# Start time: 17:55:36 on May 01,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.nim_pkg
+# Loading std.env(body)
+# Loading work.tb_elen0040_nim(sim)#1
+view wave
+# .main_pane.wave.interior.cs.body.pw.wf
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/wave_setup.do}
+# ** Error: Unrecognized option: "--- CLOCKS ---" ignored.
+# Error in macro C:\Users\Thomas\Documents\Uliege\Digital Electronics\Projet\wave_setup.do line 9
+# Unrecognized option: "--- CLOCKS ---" ignored.
+#     while executing
+# "add wave -divider {--- CLOCKS ---}"
+run -all
+# ** Note: Phase 0: IDLE - both player LEDs should be ON
+#    Time: 0 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 1: START game
+#    Time: 1350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 2: P1 UP CONFIRM; P2 turn begins
+#    Time: 2550 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 3: human JOKER1 then CONFIRM
+#    Time: 4350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: hold CONFIRM 5 cycles - must fire once
+#    Time: 6450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: bcd_sel=1 (expected 1 = fired once)
+#    Time: 9450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: simultaneous UP + CONFIRM - only UP should fire
+#    Time: 9750 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: bcd_sel=2 (expected > 1 = UP fired, CONFIRM ignored)
+#    Time: 10650 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: RESET mid-game - expect S_IDLE
+#    Time: 11850 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: led_p1='1' led_p2='1' (both '1' = IDLE)
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 5: second game START - verify joker reset
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 6: grinding to S_WIN
+#    Time: 16350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: S_WIN - observe winner blink, then START
+#    Time: 76350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: back in IDLE - led_p1='1' led_p2='1'
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Simulation complete
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# Break in Process stim at C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd line 292
+
+
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/compile.do}
+# End time: 17:56:06 on May 01,2026, Elapsed time: 0:00:30
+# Errors: 1, Warnings: 0
+# 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:56:06 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package nim_pkg
+# End time: 17:56:07 on May 01,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:56:07 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity nim_debounce
+# -- Compiling architecture rtl of nim_debounce
+# End time: 17:56:07 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:56:07 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity nim_sr
+# -- Compiling architecture rtl of nim_sr
+# End time: 17:56:07 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:56:07 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity nim_fsm
+# -- Compiling architecture rtl of nim_fsm
+# End time: 17:56:07 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:56:07 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity ELEN0040_Nim
+# -- Compiling architecture rtl of ELEN0040_Nim
+# End time: 17:56:07 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:56:07 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Loading package ENV
+# -- Compiling entity tb_ELEN0040_Nim
+# -- Compiling architecture sim of tb_ELEN0040_Nim
+# -- Loading entity ELEN0040_Nim
+# End time: 17:56:07 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.tb_ELEN0040_Nim
+# vsim work.tb_ELEN0040_Nim 
+# Start time: 17:56:07 on May 01,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.nim_pkg
+# Loading std.env(body)
+# Loading work.tb_elen0040_nim(sim)#1
+view wave
+# .main_pane.wave.interior.cs.body.pw.wf
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/wave_setup.do}
+# ** Error: Unrecognized option: "--- CLOCKS ---" ignored.
+# Error in macro C:\Users\Thomas\Documents\Uliege\Digital Electronics\Projet\wave_setup.do line 9
+# Unrecognized option: "--- CLOCKS ---" ignored.
+#     while executing
+# "add wave -divider {--- CLOCKS ---}"
+run -all
+# ** Note: Phase 0: IDLE - both player LEDs should be ON
+#    Time: 0 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 1: START game
+#    Time: 1350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 2: P1 UP CONFIRM; P2 turn begins
+#    Time: 2550 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 3: human JOKER1 then CONFIRM
+#    Time: 4350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: hold CONFIRM 5 cycles - must fire once
+#    Time: 6450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: bcd_sel=1 (expected 1 = fired once)
+#    Time: 9450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: simultaneous UP + CONFIRM - only UP should fire
+#    Time: 9750 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: bcd_sel=2 (expected > 1 = UP fired, CONFIRM ignored)
+#    Time: 10650 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: RESET mid-game - expect S_IDLE
+#    Time: 11850 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: led_p1='1' led_p2='1' (both '1' = IDLE)
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 5: second game START - verify joker reset
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 6: grinding to S_WIN
+#    Time: 16350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: S_WIN - observe winner blink, then START
+#    Time: 76350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: back in IDLE - led_p1='1' led_p2='1'
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Simulation complete
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# Break in Process stim at C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd line 292
+
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/compile.do}
+# End time: 17:59:05 on May 01,2026, Elapsed time: 0:02:58
+# Errors: 1, Warnings: 0
+# 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:59:06 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package nim_pkg
+# End time: 17:59:06 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:59:06 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity nim_debounce
+# -- Compiling architecture rtl of nim_debounce
+# End time: 17:59:06 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:59:06 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity nim_sr
+# -- Compiling architecture rtl of nim_sr
+# End time: 17:59:06 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:59:06 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity nim_fsm
+# -- Compiling architecture rtl of nim_fsm
+# End time: 17:59:06 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:59:06 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Compiling entity ELEN0040_Nim
+# -- Compiling architecture rtl of ELEN0040_Nim
+# End time: 17:59:06 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 17:59:06 on May 01,2026
+# vcom -reportprogress 300 -2008 -work work C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package nim_pkg
+# -- Loading package ENV
+# -- Compiling entity tb_ELEN0040_Nim
+# -- Compiling architecture sim of tb_ELEN0040_Nim
+# -- Loading entity ELEN0040_Nim
+# End time: 17:59:06 on May 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.tb_ELEN0040_Nim
+# vsim work.tb_ELEN0040_Nim 
+# Start time: 17:59:06 on May 01,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.nim_pkg
+# Loading std.env(body)
+# Loading work.tb_elen0040_nim(sim)#1
+view wave
+# .main_pane.wave.interior.cs.body.pw.wf
+do {C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/wave_setup.do}
+# ** UI-Msg (Warning): (vish-4014) No objects found matching '/tb_elen0040_nim/dut/carousel_r'.
+# Error in macro C:\Users\Thomas\Documents\Uliege\Digital Electronics\Projet\wave_setup.do line 31
+# ** UI-Msg (Warning): (vish-4014) No objects found matching '/tb_elen0040_nim/dut/carousel_r'.
+#     while executing
+# "add wave -divider {IDLE CAROUSEL}"
+run -all
+# ** Note: Phase 0: IDLE - both player LEDs should be ON
+#    Time: 0 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 1: START game
+#    Time: 1350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 2: P1 UP CONFIRM; P2 turn begins
+#    Time: 2550 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 3: human JOKER1 then CONFIRM
+#    Time: 4350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: hold CONFIRM 5 cycles - must fire once
+#    Time: 6450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 1: bcd_sel=1 (expected 1 = fired once)
+#    Time: 9450 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: simultaneous UP + CONFIRM - only UP should fire
+#    Time: 9750 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: EDGE CASE 2: bcd_sel=2 (expected > 1 = UP fired, CONFIRM ignored)
+#    Time: 10650 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: RESET mid-game - expect S_IDLE
+#    Time: 11850 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 4: led_p1='1' led_p2='1' (both '1' = IDLE)
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 5: second game START - verify joker reset
+#    Time: 13050 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 6: grinding to S_WIN
+#    Time: 16350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: S_WIN - observe winner blink, then START
+#    Time: 76350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Phase 7: back in IDLE - led_p1='1' led_p2='1'
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# ** Note: Simulation complete
+#    Time: 79350 ns  Iteration: 0  Instance: /tb_elen0040_nim
+# Break in Process stim at C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd line 292
+# End time: 20:18:09 on May 01,2026, Elapsed time: 2:19:03
+# Errors: 0, Warnings: 0

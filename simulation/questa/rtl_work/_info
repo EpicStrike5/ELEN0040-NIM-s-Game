@@ -12,10 +12,10 @@ Z0 !s99 nomlopt
 cModel Technology
 Z1 dC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/simulation/questa
 T_opt
-!s110 1775723579
-VZ9o[X8OY>X^V>U5M_Z3?g0
+!s110 1777650709
+Vh2ja05HC=SgfiMc9B@`Lm1
 04 15 3 work tb_elen0040_nim sim 1
-=1-04d4c4e8d1ae-69d7643a-1ef-6d90
+=1-04d4c4e8d1ae-69f4cc14-3c9-29f8
 R0
 !s12b OEM100
 !s124 OEM10U5 
@@ -24,8 +24,8 @@ tCvgOpt 0
 n@_opt
 OL;O;2023.3;77
 Eelen0040_nim
-Z2 w1775327126
-Z3 DPx4 work 7 nim_pkg 0 22 Y;NJzY>=8_>@4:g2Snz962
+Z2 w1777646262
+Z3 DPx4 work 7 nim_pkg 0 22 m;3f?D1dkY@K6MiBaWY^51
 Z4 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
 Z5 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
 Z6 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
@@ -34,14 +34,14 @@ R1
 Z7 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd
 Z8 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd
 l0
-L29 1
-Vej7?gcUX>@HOc0C4@CZ482
-!s100 IiIAIIUllUdZ?]dFFnmZC3
+L36 1
+Vfl9WM_k9RR[od0T<0^f_C0
+!s100 <Rijm92jAV6S4a`7E;@5E1
 Z9 OL;C;2023.3;77
 31
-Z10 !s110 1775723577
+Z10 !s110 1777650708
 !i10b 1
-Z11 !s108 1775723577.000000
+Z11 !s108 1777650708.000000
 Z12 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd|
 Z13 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd|
 !i113 0
@@ -52,12 +52,12 @@ R3
 R4
 R5
 R6
-Z16 DEx4 work 12 elen0040_nim 0 22 ej7?gcUX>@HOc0C4@CZ482
+Z16 DEx4 work 12 elen0040_nim 0 22 fl9WM_k9RR[od0T<0^f_C0
 !i122 4
-l116
-L62 142
-VY=zY82Z;lAVaVij62JADM3
-!s100 B_MkzNm12QO3ZA_UlJ7<93
+l136
+L69 185
+V]MBN<`Pomo]3`;dKRQ:`R3
+!s100 NheMK<BH:M^?2Y]2<UQUi2
 R9
 31
 R10
@@ -69,7 +69,7 @@ R13
 R14
 R15
 Enim_debounce
-Z17 w1772718603
+Z17 w1777645688
 R5
 R6
 !i122 1
@@ -77,59 +77,59 @@ R1
 Z18 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd
 Z19 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd
 l0
-L22 1
-VX@8Qa24Q@=G=Zgl0PRJC]2
-!s100 X[;X]_Dd>P=?3i`0E<JL41
+L20 1
+V3dBGGKKHaeJPY@`U@P7]_2
+!s100 ;Tc_VAliKmULM6[2MXKgg2
 R9
 31
-R10
+Z20 !s110 1777650707
 !i10b 1
-R11
-Z20 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd|
-Z21 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd|
+Z21 !s108 1777650707.000000
+Z22 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd|
+Z23 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd|
 !i113 0
 R14
 R15
 Artl
 R5
 R6
-DEx4 work 12 nim_debounce 0 22 X@8Qa24Q@=G=Zgl0PRJC]2
+DEx4 work 12 nim_debounce 0 22 3dBGGKKHaeJPY@`U@P7]_2
 !i122 1
-l32
-L30 18
-VYI[@bW1bj;?0X<32g<Ac=3
-!s100 aHJNJO>zG5fYbzCU=K^@o0
+l36
+L29 24
+VIUO6z86UNmk8b5202@8dM3
+!s100 jQA?_g1cSbL^b[@<0O`Q>0
 R9
 31
-R10
-!i10b 1
-R11
 R20
+!i10b 1
 R21
+R22
+R23
 !i113 0
 R14
 R15
 Enim_fsm
-Z22 w1774738862
+Z24 w1777650028
 R3
 R4
 R5
 R6
 !i122 3
 R1
-Z23 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd
-Z24 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd
+Z25 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd
+Z26 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd
 l0
-L28 1
-VlU4hVKenjF>HJ;>9TDWzW0
-!s100 n7z3lR^XAaoOf?CY]T:a31
+L47 1
+Vi2UgMICN^6WhM:@OLaJ9A1
+!s100 0ge3;_hNhJNE_hVNV5iMN1
 R9
 31
 R10
 !i10b 1
 R11
-Z25 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd|
-Z26 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd|
+Z27 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd|
+Z28 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd|
 !i113 0
 R14
 R15
@@ -138,19 +138,19 @@ R3
 R4
 R5
 R6
-DEx4 work 7 nim_fsm 0 22 lU4hVKenjF>HJ;>9TDWzW0
+DEx4 work 7 nim_fsm 0 22 i2UgMICN^6WhM:@OLaJ9A1
 !i122 3
-l57
-L45 132
-VQOGmX2?G26cSzoK63CWUi3
-!s100 `DbJlmEmfXdOoTKd;9AQZ1
+l90
+L66 203
+VNha5^0LXQYHajAJOEHUcT0
+!s100 P`3T47X]4c<;9kBO8Y]8^1
 R9
 31
 R10
 !i10b 1
 R11
-R25
-R26
+R27
+R28
 !i113 0
 R14
 R15
@@ -158,44 +158,44 @@ Pnim_pkg
 R5
 R6
 !i122 0
-w1772716589
+w1777646539
 R1
 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd
 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd
 l0
-L8 14
-VY;NJzY>=8_>@4:g2Snz962
-!s100 ljmmW1aIzAEL^`QcB8KPf0
+L10 21
+Vm;3f?D1dkY@K6MiBaWY^51
+!s100 ]HhEDo00m3YaalEYePkO90
 R9
 31
-R10
+R20
 !i10b 1
-!s108 1775723576.000000
+R21
 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd|
 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd|
 !i113 0
 R14
 R15
 Enim_sr
-Z27 w1775338412
+Z29 w1777646255
 R4
 R5
 R6
 !i122 2
 R1
-Z28 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd
-Z29 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd
+Z30 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd
+Z31 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd
 l0
-L36 1
-V10@>WR4aD<R]dNc5GDkOd3
-!s100 60HF_6]Xjk0oMBRd[UQQ61
+L34 1
+V`XRQ<RiDZKA]C0znKI5U43
+!s100 @@=FnA5P@ae;CH3<HYTl?1
 R9
 31
 R10
 !i10b 1
-R11
-Z30 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd|
-Z31 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd|
+R21
+Z32 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd|
+Z33 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd|
 !i113 0
 R14
 R15
@@ -203,67 +203,67 @@ Artl
 R4
 R5
 R6
-DEx4 work 6 nim_sr 0 22 10@>WR4aD<R]dNc5GDkOd3
+DEx4 work 6 nim_sr 0 22 `XRQ<RiDZKA]C0znKI5U43
 !i122 2
-l69
-L47 56
-VZGD^5DZ:K0n]kHPc7L0hC2
-!s100 baf?fLk?bCBlV<mGM@P:E0
+l65
+L45 67
+VfBKAflMd]h]1CT>Y^@aCb0
+!s100 3`XIVC9WLg5bV=H[VKU7K2
 R9
 31
 R10
 !i10b 1
-R11
-R30
-R31
+R21
+R32
+R33
 !i113 0
 R14
 R15
 Etb_elen0040_nim
-Z32 w1774739055
-Z33 DPx3 std 3 env 0 22 QPZJVBPkV?55nUWhDzFik0
+Z34 w1777650209
+Z35 DPx3 std 3 env 0 22 QPZJVBPkV?55nUWhDzFik0
 R3
 R4
 R5
 R6
 !i122 5
 R1
-Z34 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd
-Z35 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd
+Z36 8C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd
+Z37 FC:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd
 l0
-L30 1
-V[mAI2Ldbe5F5d=l?3XVW90
-!s100 m]3WbM`VES9K^m]DFJkG>2
+L37 1
+V?ejY_R74J@:8[E=>YFHAN0
+!s100 5MoLCW6>TagjG^<UNzH[F3
 R9
 31
 R10
 !i10b 1
 R11
-Z36 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd|
-Z37 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd|
+Z38 !s90 -reportprogress|300|-93|-work|work|C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd|
+Z39 !s107 C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/tb_ELEN0040_Nim.vhd|
 !i113 0
 R14
 R15
 Asim
 R16
-R33
+R35
 R3
 R4
 R5
 R6
-DEx4 work 15 tb_elen0040_nim 0 22 [mAI2Ldbe5F5d=l?3XVW90
+DEx4 work 15 tb_elen0040_nim 0 22 ?ejY_R74J@:8[E=>YFHAN0
 !i122 5
-l59
-L33 226
-Vj>zPjJ@2N][nklV644M>21
-!s100 2541D2cI<AJ^[YSf8Zg110
+l69
+L40 257
+Vf4?BLOHYUbzjD4E_JMTZM3
+!s100 4Jh9HX?9iFXhFA2fidJZ=0
 R9
 31
 R10
 !i10b 1
 R11
-R36
-R37
+R38
+R39
 !i113 0
 R14
 R15

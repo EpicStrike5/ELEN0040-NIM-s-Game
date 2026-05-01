@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nim — FSM State Machine</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f4f8;
+            color: #222;
+            padding: 40px 32px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #1a3d5c;
+            border-bottom: 3px solid #2d5986;
+            padding-bottom: 10px;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: #1a3d5c;
+            margin: 40px 0 14px;
+            padding-left: 10px;
+            border-left: 4px solid #2d5986;
+        }
+
+        /* ── Mermaid diagram wrapper ── */
+        .diagram-box {
+            background: #fff;
+            border: 1px solid #c8d8e8;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+
+        /* ── Transition table ── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            font-size: 0.88rem;
+        }
+
+        thead tr th {
+            background: #1a3d5c;
+            color: #fff;
+            padding: 11px 14px;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        tbody tr td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #e8eef4;
+            vertical-align: top;
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover td     { background: #f0f6ff; }
+
+        /* Priority colour stripe on left edge of each S_PLAY row */
+        .p1 td:first-child { border-left: 5px solid #c0392b; }
+        .p2 td:first-child { border-left: 5px solid #e67e22; }
+        .p3 td:first-child { border-left: 5px solid #d4ac0d; }
+        .p4 td:first-child { border-left: 5px solid #27ae60; }
+        .p5 td:first-child { border-left: 5px solid #2980b9; }
+        .reset-row td:first-child { border-left: 5px solid #8e44ad; }
+
+        /* State badges */
+        .badge {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .idle { background: #d5f0d5; color: #1e6b1e; }
+        .play { background: #d0e4f7; color: #154c7a; }
+        .win  { background: #fbd5d3; color: #922b21; }
+        .any  { background: #ead9f5; color: #5b2880; }
+
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #eef2f7;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        /* ── Variable reference grid ── */
+        .var-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+        }
+
+        .var-card {
+            background: #fff;
+            border: 1px solid #c8d8e8;
+            border-radius: 8px;
+            padding: 14px 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+
+        .var-card .var-name {
+            font-family: 'Consolas', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a3d5c;
+            margin-bottom: 4px;
+        }
+
+        .var-card .var-type {
+            font-size: 0.78rem;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .var-card .var-desc {
+            font-size: 0.86rem;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* ── Output table ── */
+        .note-box {
+            background: #fffbea;
+            border-left: 4px solid #f0c040;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.78rem;
+            color: #aaa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Nim — FSM State Machine</h1>
+<p class="subtitle">
+    Derived from <code>nim_fsm.vhd</code> &nbsp;·&nbsp;
+    <strong>x</strong> = <code>sticks_r</code> (stick count, 6-bit unsigned, range 0–63) &nbsp;·&nbsp;
+    All transitions are synchronous on the rising edge of <strong>clk1</strong>
+</p>
+
+
+<!-- ═══════════════════════════════════════════════════════════ DIAGRAM -->
+
+<div class="diagram-box">
+<div class="mermaid">
+%%{init: {
+    "theme": "base",
+    "themeVariables": {
+        "primaryColor":       "#dae8fc",
+        "primaryTextColor":   "#0d2b45",
+        "primaryBorderColor": "#2d5986",
+        "lineColor":          "#445",
+        "secondaryColor":     "#d5f0d5",
+        "tertiaryColor":      "#fbd5d3",
+        "noteBkgColor":       "#fffbea",
+        "noteBorderColor":    "#d4ac0d",
+        "noteTextColor":      "#333",
+        "fontSize":           "15px"
+    }
+} }%%
+stateDiagram-v2
+    direction LR
+
+    [*] --> S_IDLE : power-on
+
+    S_IDLE --> S_PLAY : START ↑
+
+    S_PLAY --> S_WIN  : CONFIRM ∧ x ≤ sel
+    S_PLAY --> S_PLAY : UP  [sel &lt; max_tk]
+    S_PLAY --> S_PLAY : DOWN  [sel &gt; 1]
+    S_PLAY --> S_PLAY : JOKER1 ∧ j1_av
+    S_PLAY --> S_PLAY : JOKER2 ∧ j2_av
+    S_PLAY --> S_PLAY : CONFIRM ∧ x &gt; sel
+
+    S_WIN  --> S_IDLE : START ↑
+    S_PLAY --> S_IDLE : rst = 1
+    S_WIN  --> S_IDLE : rst = 1
+
+    note left of S_IDLE
+        OUTPUT
+        led_p1 = 1, led_p2 = 1
+        LED bars: carousel (0→40→0)
+        led_j1 = 0, led_j2 = 0
+    end note
+
+    note right of S_PLAY
+        PRIORITY (top = highest)
+        1. UP
+        2. DOWN
+        3. JOKER1 ∧ j1_av
+        4. JOKER2 ∧ j2_av
+        5. CONFIRM
+    end note
+
+    note right of S_WIN
+        OUTPUT
+        Winner LED: blinks at clk1÷2
+        Other LED:  off
+        LED bars:   x frozen
+        led_j1 = 0, led_j2 = 0
+    end note
+</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════ TRANSITION TABLE -->
+
+<h2>Complete Transition Table</h2>
+
+<div class="note-box">
+    Transitions inside <span class="badge play">S_PLAY</span> are evaluated in priority order every clk1 cycle.
+    Only the <em>highest-priority</em> active condition fires — lower ones are skipped entirely.
+    The coloured left border matches priority level (red = highest).
+    <br>
+    The synchronous reset <strong>rst = 1</strong> overrides all other conditions from any state.
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Guard condition</th>
+            <th>Actions (register updates)</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <!-- ── RESET (overrides everything) ── -->
+        <tr class="reset-row">
+            <td><span class="badge any">ANY</span></td>
+            <td><span class="badge idle">S_IDLE</span></td>
+            <td><code>rst = 1</code> &nbsp;<em>(synchronous, highest priority)</em></td>
+            <td>
+                <code>state_r ← S_IDLE</code><br>
+                <code>player_r ← 0</code><br>
+                <em>sticks / max_tk / sel / joker flags untouched</em>
+            </td>
+        </tr>
+
+        <!-- ── S_IDLE ── -->
+        <tr>
+            <td><span class="badge idle">S_IDLE</span></td>
+            <td><span class="badge play">S_PLAY</span></td>
+            <td><code>db_edge(B_START) = 1</code></td>
+            <td>
+                <code>x ← resize(unsigned(rnd[4:0]), 6) + 9</code> &nbsp;<em>(9–40 sticks)</em><br>
+                <code>player_r ← rnd[0]</code> &nbsp;<em>(0=P1 first, 1=P2 first)</em><br>
+                <code>max_tk_r ← 3</code><br>
+                <code>sel_r ← 1</code><br>
+                <code>j1_p1, j1_p2, j2_p1, j2_p2 ← 1</code>
+            </td>
+        </tr>
+
+        <!-- ── S_PLAY self-loops (priority order) ── -->
+        <tr class="p1">
+            <td><span class="badge play">S_PLAY</span></td>
+            <td><span class="badge play">S_PLAY</span></td>
+            <td>
+                <strong>① UP</strong><br>
+                <code>db_edge(B_UP) = 1</code>
+            </td>
+            <td>
+                <code>if sel_r &lt; max_tk_r →</code><br>
+                &nbsp;&nbsp;<code>sel_r ← sel_r + 1</code>
+            </td>
+        </tr>
+        <tr class="p2">
+            <td><span class="badge play">S_PLAY</span></td>
+            <td><span class="badge play">S_PLAY</span></td>
+            <td>
+                <strong>② DOWN</strong><br>
+                <code>db_edge(B_DOWN) = 1</code>
+            </td>
+            <td>
+                <code>if sel_r &gt; 1 →</code><br>
+                &nbsp;&nbsp;<code>sel_r ← sel_r - 1</code>
+            </td>
+        </tr>
+        <tr class="p3">
+            <td><span class="badge play">S_PLAY</span></td>
+            <td><span class="badge play">S_PLAY</span></td>
+            <td>
+                <strong>③ JOKER 1</strong><br>
+                <code>db_edge(B_JOKER1) = 1</code><br>
+                <code>∧ j1_av = 1</code>
+            </td>
+            <td>
+                <code>max_tk_r ← unsigned(rnd[2:0]) + 2</code> &nbsp;<em>(2–9)</em><br>
+                <code>if sel_r &gt; max_tk_r → sel_r ← max_tk_r</code><br>
+                <code>active player's j1 flag ← 0</code>
+            </td>
+        </tr>
+        <tr class="p4">
+            <td><span class="badge play">S_PLAY</span></td>
+            <td><span class="badge play">S_PLAY</span></td>
+            <td>
+                <strong>④ JOKER 2</strong><br>
+                <code>db_edge(B_JOKER2) = 1</code><br>
+                <code>∧ j2_av = 1</code>
+            </td>
+            <td>
+                <code>Δ ← unsigned(rnd[1:0]) + 1</code> &nbsp;<em>(1–4)</em><br>
+                <code>if rnd[3]=0 → x ← x + Δ</code><br>
+                <code>if rnd[3]=1 → x ← max(x − Δ, 1)</code><br>
+                <code>if sel_r &gt; x → sel_r ← x[3:0]</code><br>
+                <code>active player's j2 flag ← 0</code>
+            </td>
+        </tr>
+        <tr class="p5">
+            <td><span class="badge play">S_PLAY</span></td>
+            <td><span class="badge play">S_PLAY</span></td>
+            <td>
+                <strong>⑤ CONFIRM — normal turn</strong><br>
+                <code>db_edge(B_CONFIRM) = 1</code><br>
+                <code>∧ x &gt; sel_r</code>
+            </td>
+            <td>
+                <code>x ← x − sel_r</code><br>
+                <code>sel_r ← 1</code><br>
+                <code>player_r ← ¬player_r</code>
+            </td>
+        </tr>
+
+        <!-- ── S_PLAY → S_WIN ── -->
+        <tr>
+            <td><span class="badge play">S_PLAY</span></td>
+            <td><span class="badge win">S_WIN</span></td>
+            <td>
+                <strong>⑤ CONFIRM — last sticks</strong><br>
+                <code>db_edge(B_CONFIRM) = 1</code><br>
+                <code>∧ x ≤ sel_r</code>
+            </td>
+            <td>
+                <code>player_r ← ¬player_r</code> &nbsp;<em>(misère: taker loses)</em><br>
+                <code>state_r ← S_WIN</code><br>
+                <em>winner = new player_r value</em>
+            </td>
+        </tr>
+
+        <!-- ── S_WIN ── -->
+        <tr>
+            <td><span class="badge win">S_WIN</span></td>
+            <td><span class="badge idle">S_IDLE</span></td>
+            <td><code>db_edge(B_START) = 1</code></td>
+            <td><code>state_r ← S_IDLE</code></td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<!-- ═══════════════════════════════════════════════════════════ VARIABLE REFERENCE -->
+
+<h2>Variable Reference</h2>
+
+<div class="var-grid">
+
+    <div class="var-card">
+        <div class="var-name">x &nbsp;(sticks_r)</div>
+        <div class="var-type">unsigned(5:0) &nbsp;·&nbsp; range 0–63</div>
+        <div class="var-desc">
+            Number of sticks remaining on the table.<br>
+            Set to <strong>rnd[4:0] + 9</strong> (range 9–40) on START.<br>
+            Decremented by <code>sel_r</code> on CONFIRM.<br>
+            Modified ±Δ by JOKER2.
+        </div>
+    </div>
+
+    <div class="var-card">
+        <div class="var-name">sel_r</div>
+        <div class="var-type">unsigned(3:0) &nbsp;·&nbsp; range 1–max_tk</div>
+        <div class="var-desc">
+            Current player selection (how many sticks to take).<br>
+            Incremented by UP, decremented by DOWN.<br>
+            Reset to 1 after each CONFIRM turn.<br>
+            Clamped down if JOKER1 reduces max_tk.
+        </div>
+    </div>
+
+    <div class="var-card">
+        <div class="var-name">max_tk_r</div>
+        <div class="var-type">unsigned(3:0) &nbsp;·&nbsp; default 3</div>
+        <div class="var-desc">
+            Maximum sticks a player may take per turn.<br>
+            Default 3, reset to 3 on START.<br>
+            Rerolled to <strong>rnd[2:0] + 2</strong> (range 2–9) by JOKER1.
+        </div>
+    </div>
+
+    <div class="var-card">
+        <div class="var-name">player_r</div>
+        <div class="var-type">std_logic &nbsp;·&nbsp; 0=P1 / 1=P2</div>
+        <div class="var-desc">
+            Whose turn it is.<br>
+            Set from <strong>rnd[0]</strong> on START.<br>
+            Toggled on every successful CONFIRM.<br>
+            Also toggled before entering S_WIN — so <code>player_r</code> in S_WIN holds the <em>winner</em>.
+        </div>
+    </div>
+
+    <div class="var-card">
+        <div class="var-name">rnd</div>
+        <div class="var-type">std_logic_vector(6:0) &nbsp;·&nbsp; range 0–127</div>
+        <div class="var-desc">
+            Wire from <code>sr_cnt</code> in nim_sr.<br>
+            Free-runs at clk0 (59–320 Hz) through all 128 values.<br>
+            Sampled at the exact clk1 cycle a button fires — unpredictable to the player.
+        </div>
+    </div>
+
+    <div class="var-card">
+        <div class="var-name">j1_p1 / j1_p2<br>j2_p1 / j2_p2</div>
+        <div class="var-type">std_logic &nbsp;·&nbsp; 1=available / 0=spent</div>
+        <div class="var-desc">
+            One flag per player per joker.<br>
+            All four reset to 1 on START.<br>
+            Cleared (0) when the active player uses that joker — each joker can only be used once per game per player.
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════ OUTPUT TABLE -->
+
+<h2>Output Encoding per State</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Signal</th>
+            <th><span class="badge idle">S_IDLE</span></th>
+            <th><span class="badge play">S_PLAY</span></th>
+            <th><span class="badge win">S_WIN</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>led_p1</code></td>
+            <td><code>1</code> (always on)</td>
+            <td><code>NOT player_r</code> (on when P1's turn)</td>
+            <td><code>blink_ff</code> if P1 won, else <code>0</code></td>
+        </tr>
+        <tr>
+            <td><code>led_p2</code></td>
+            <td><code>1</code> (always on)</td>
+            <td><code>player_r</code> (on when P2's turn)</td>
+            <td><code>blink_ff</code> if P2 won, else <code>0</code></td>
+        </tr>
+        <tr>
+            <td><code>led_j1</code></td>
+            <td><code>0</code></td>
+            <td><code>j1_p1</code> if P1's turn, else <code>j1_p2</code></td>
+            <td><code>0</code></td>
+        </tr>
+        <tr>
+            <td><code>led_j2</code></td>
+            <td><code>0</code></td>
+            <td><code>j2_p1</code> if P1's turn, else <code>j2_p2</code></td>
+            <td><code>0</code></td>
+        </tr>
+        <tr>
+            <td><code>bcd_max_tk</code></td>
+            <td colspan="3">Wire to <code>max_tk_r</code> (always live)</td>
+        </tr>
+        <tr>
+            <td><code>bcd_sel</code></td>
+            <td colspan="3">Wire to <code>sel_r</code> (always live)</td>
+        </tr>
+        <tr>
+            <td>LED bars (SR chain)</td>
+            <td>Carousel: <code>anim_r</code> counts 0→63</td>
+            <td>Shows <code>x</code> lit LEDs (0–40)</td>
+            <td>Shows <code>x = 0</code> frozen</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<footer>
+    Generated from nim_fsm.vhd · ELEN0040 Nim · Intel MAX V 5M160ZE64C4
+</footer>
+
+<script>
+    mermaid.initialize({ startOnLoad: true, theme: 'base' });
+</script>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ELEN0040_Nim
-Wed Apr 22 12:46:10 2026
+Fri May  1 19:43:35 2026
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -44,12 +44,12 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +-----------------------------+------------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Wed Apr 22 12:46:10 2026          ;
+; Analysis & Synthesis Status ; Successful - Fri May  1 19:43:35 2026          ;
 ; Quartus Prime Version       ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name               ; ELEN0040_Nim                                   ;
 ; Top-level Entity Name       ; ELEN0040_Nim                                   ;
 ; Family                      ; MAX V                                          ;
-; Total logic elements        ; 158                                            ;
+; Total logic elements        ; 165                                            ;
 ; Total pins                  ; 24                                             ;
 ; Total virtual pins          ; 0                                              ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                                  ;
@@ -161,20 +161,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------------------------------+
 ; Resource                                    ; Usage                             ;
 +---------------------------------------------+-----------------------------------+
-; Total logic elements                        ; 158                               ;
-;     -- Combinational with no register       ; 114                               ;
-;     -- Register only                        ; 8                                 ;
-;     -- Combinational with a register        ; 36                                ;
+; Total logic elements                        ; 165                               ;
+;     -- Combinational with no register       ; 121                               ;
+;     -- Register only                        ; 5                                 ;
+;     -- Combinational with a register        ; 39                                ;
 ;                                             ;                                   ;
 ; Logic element usage by number of LUT inputs ;                                   ;
-;     -- 4 input functions                    ; 70                                ;
-;     -- 3 input functions                    ; 34                                ;
-;     -- 2 input functions                    ; 37                                ;
+;     -- 4 input functions                    ; 76                                ;
+;     -- 3 input functions                    ; 42                                ;
+;     -- 2 input functions                    ; 33                                ;
 ;     -- 1 input functions                    ; 9                                 ;
 ;     -- 0 input functions                    ; 0                                 ;
 ;                                             ;                                   ;
 ; Logic elements by mode                      ;                                   ;
-;     -- normal mode                          ; 128                               ;
+;     -- normal mode                          ; 135                               ;
 ;     -- arithmetic mode                      ; 30                                ;
 ;     -- qfbk mode                            ; 0                                 ;
 ;     -- register cascade mode                ; 0                                 ;
@@ -185,9 +185,9 @@ https://fpgasoftware.intel.com/eula.
 ; Total logic cells in carry chains           ; 36                                ;
 ; I/O pins                                    ; 24                                ;
 ; Maximum fan-out node                        ; nim_fsm:u_fsm|state_r.state_bit_0 ;
-; Maximum fan-out                             ; 35                                ;
-; Total fan-out                               ; 565                               ;
-; Average fan-out                             ; 3.10                              ;
+; Maximum fan-out                             ; 37                                ;
+; Total fan-out                               ; 603                               ;
+; Average fan-out                             ; 3.19                              ;
 +---------------------------------------------+-----------------------------------+
 
 
@@ -196,10 +196,10 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------+--------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name              ; Entity Name  ; Library Name ;
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------+--------------+--------------+
-; |ELEN0040_Nim              ; 158 (17)    ; 44           ; 0          ; 24   ; 0            ; 114 (10)     ; 8 (0)             ; 36 (7)           ; 36 (6)          ; 0 (0)      ; |ELEN0040_Nim                    ; ELEN0040_Nim ; work         ;
-;    |nim_debounce:u_deb|    ; 9 (9)       ; 6            ; 0          ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 6 (6)            ; 0 (0)           ; 0 (0)      ; |ELEN0040_Nim|nim_debounce:u_deb ; nim_debounce ; work         ;
-;    |nim_fsm:u_fsm|         ; 105 (105)   ; 21           ; 0          ; 0    ; 0            ; 84 (84)      ; 1 (1)             ; 20 (20)          ; 18 (18)         ; 0 (0)      ; |ELEN0040_Nim|nim_fsm:u_fsm      ; nim_fsm      ; work         ;
-;    |nim_sr:u_sr|           ; 27 (27)     ; 10           ; 0          ; 0    ; 0            ; 17 (17)      ; 7 (7)             ; 3 (3)            ; 12 (12)         ; 0 (0)      ; |ELEN0040_Nim|nim_sr:u_sr        ; nim_sr       ; work         ;
+; |ELEN0040_Nim              ; 165 (17)    ; 44           ; 0          ; 24   ; 0            ; 121 (10)     ; 5 (0)             ; 39 (7)           ; 36 (6)          ; 0 (0)      ; |ELEN0040_Nim                    ; ELEN0040_Nim ; work         ;
+;    |nim_debounce:u_deb|    ; 8 (8)       ; 6            ; 0          ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 6 (6)            ; 0 (0)           ; 0 (0)      ; |ELEN0040_Nim|nim_debounce:u_deb ; nim_debounce ; work         ;
+;    |nim_fsm:u_fsm|         ; 119 (119)   ; 21           ; 0          ; 0    ; 0            ; 98 (98)      ; 4 (4)             ; 17 (17)          ; 18 (18)         ; 0 (0)      ; |ELEN0040_Nim|nim_fsm:u_fsm      ; nim_fsm      ; work         ;
+;    |nim_sr:u_sr|           ; 21 (21)     ; 10           ; 0          ; 0    ; 0            ; 11 (11)      ; 1 (1)             ; 9 (9)            ; 12 (12)         ; 0 (0)      ; |ELEN0040_Nim|nim_sr:u_sr        ; nim_sr       ; work         ;
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------+--------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -222,11 +222,11 @@ Encoding Type:  Sequential Encoding
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
 ; Total registers                              ; 44    ;
-; Number of registers using Synchronous Clear  ; 11    ;
-; Number of registers using Synchronous Load   ; 5     ;
+; Number of registers using Synchronous Clear  ; 10    ;
+; Number of registers using Synchronous Load   ; 6     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 13    ;
+; Number of registers using Clock Enable       ; 12    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -236,30 +236,26 @@ Encoding Type:  Sequential Encoding
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; nim_fsm:u_fsm|max_tk_r[0]              ; 2       ;
-; nim_fsm:u_fsm|max_tk_r[1]              ; 2       ;
-; nim_fsm:u_fsm|sel_r[0]                 ; 11      ;
-; nim_fsm:u_fsm|j1_p1                    ; 3       ;
-; nim_fsm:u_fsm|j1_p2                    ; 3       ;
-; nim_fsm:u_fsm|j2_p1                    ; 3       ;
-; nim_fsm:u_fsm|j2_p2                    ; 3       ;
-; Total number of inverted registers = 7 ;         ;
+; nim_fsm:u_fsm|max_take_r[2]            ; 3       ;
+; nim_fsm:u_fsm|selection_r[0]           ; 16      ;
+; nim_fsm:u_fsm|joker1_p1                ; 3       ;
+; nim_fsm:u_fsm|joker1_p2                ; 3       ;
+; nim_fsm:u_fsm|joker2_p1                ; 3       ;
+; nim_fsm:u_fsm|joker2_p2                ; 3       ;
+; Total number of inverted registers = 6 ;         ;
 +----------------------------------------+---------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------+
-; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|max_tk_r[3] ;
-; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sticks_r[5] ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sticks_r[3] ;
-; 9:1                ; 3 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sel_r[1]    ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|max_tk_r[0] ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |ELEN0040_Nim|nim_fsm:u_fsm|ns_v        ;
-; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |ELEN0040_Nim|nim_fsm:u_fsm|state_r     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+; 5:1                ; 3 bits    ; 9 LEs         ; 0 LEs                ; 9 LEs                  ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|max_take_r[0]  ;
+; 10:1               ; 6 bits    ; 36 LEs        ; 12 LEs               ; 24 LEs                 ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|sticks_r[1]    ;
+; 12:1               ; 3 bits    ; 24 LEs        ; 9 LEs                ; 15 LEs                 ; Yes        ; |ELEN0040_Nim|nim_fsm:u_fsm|selection_r[1] ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |ELEN0040_Nim|nim_fsm:u_fsm|state_r        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
 
 
 +-------------------------------+
@@ -268,36 +264,36 @@ Encoding Type:  Sequential Encoding
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Wed Apr 22 12:46:02 2026
+    Info: Processing started: Fri May  1 19:43:27 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ELEN0040_Nim -c ELEN0040_Nim
 Info (16303): Aggressive Area optimization mode selected -- logic area will be prioritized at the potential cost of reduced timing performance
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
 Info (12021): Found 1 design units, including 0 entities, in source file nim_pkg.vhd
-    Info (12022): Found design unit 1: nim_pkg File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd Line: 16
+    Info (12022): Found design unit 1: nim_pkg File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_pkg.vhd Line: 10
 Info (12021): Found 2 design units, including 1 entities, in source file nim_debounce.vhd
-    Info (12022): Found design unit 1: nim_debounce-rtl File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd Line: 25
-    Info (12023): Found entity 1: nim_debounce File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd Line: 17
+    Info (12022): Found design unit 1: nim_debounce-rtl File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd Line: 28
+    Info (12023): Found entity 1: nim_debounce File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_debounce.vhd Line: 19
 Info (12021): Found 2 design units, including 1 entities, in source file nim_sr.vhd
-    Info (12022): Found design unit 1: nim_sr-rtl File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd Line: 38
-    Info (12023): Found entity 1: nim_sr File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd Line: 27
+    Info (12022): Found design unit 1: nim_sr-rtl File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd Line: 45
+    Info (12023): Found entity 1: nim_sr File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_sr.vhd Line: 34
 Info (12021): Found 2 design units, including 1 entities, in source file nim_fsm.vhd
-    Info (12022): Found design unit 1: nim_fsm-rtl File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd Line: 57
-    Info (12023): Found entity 1: nim_fsm File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd Line: 39
+    Info (12022): Found design unit 1: nim_fsm-rtl File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd Line: 67
+    Info (12023): Found entity 1: nim_fsm File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/nim_fsm.vhd Line: 48
 Info (12021): Found 2 design units, including 1 entities, in source file elen0040_nim.vhd
-    Info (12022): Found design unit 1: ELEN0040_Nim-rtl File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 70
-    Info (12023): Found entity 1: ELEN0040_Nim File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 37
+    Info (12022): Found design unit 1: ELEN0040_Nim-rtl File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 65
+    Info (12023): Found entity 1: ELEN0040_Nim File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 32
 Info (12127): Elaborating entity "ELEN0040_Nim" for the top level hierarchy
-Info (12128): Elaborating entity "nim_debounce" for hierarchy "nim_debounce:u_deb" File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 166
-Info (12128): Elaborating entity "nim_sr" for hierarchy "nim_sr:u_sr" File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 173
-Info (12128): Elaborating entity "nim_fsm" for hierarchy "nim_fsm:u_fsm" File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 183
-Info (21057): Implemented 182 device resources after synthesis - the final resource count might be different
+Info (12128): Elaborating entity "nim_debounce" for hierarchy "nim_debounce:u_deb" File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 172
+Info (12128): Elaborating entity "nim_sr" for hierarchy "nim_sr:u_sr" File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 181
+Info (12128): Elaborating entity "nim_fsm" for hierarchy "nim_fsm:u_fsm" File: C:/Users/Thomas/Documents/Uliege/Digital Electronics/Projet/ELEN0040_Nim.vhd Line: 192
+Info (21057): Implemented 189 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 9 input pins
     Info (21059): Implemented 15 output pins
-    Info (21061): Implemented 158 logic cells
+    Info (21061): Implemented 165 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 4799 megabytes
-    Info: Processing ended: Wed Apr 22 12:46:10 2026
+    Info: Processing ended: Fri May  1 19:43:35 2026
     Info: Elapsed time: 00:00:08
     Info: Total CPU time (on all processors): 00:00:19
 
